@@ -46,13 +46,13 @@ export default class AddCocktailPage extends Component {
 
         return (
             <>
-                <AddIngredientForm 
-                    ingredients={ingredients}
-                    onAddIngredient={this.addIngredient}
-                />
                 <AddCocktailForm 
                     units={units}
                     ingredients={ingredients}
+                />
+                <AddIngredientForm 
+                    ingredients={ingredients}
+                    onAddIngredient={this.addIngredient}
                 />
             </>
         )

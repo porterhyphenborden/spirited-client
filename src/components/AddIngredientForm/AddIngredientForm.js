@@ -74,15 +74,21 @@ export default class AddIngredientForm extends Component {
     }
 
     render() {
+        const ingredients = this.props.ingredients;
         return (
             <form className='add-ingredient' onSubmit={e => this.handleSubmit(e)}>
                 <h2>Add a new ingredient</h2>
                 <div className='form-group'>
                     <label htmlFor='name'>Name</label>
-                    <input name='name' id='name' type='text' onChange={e => this.updateIngredient(e.target.value)}/>
+                    <input name='name' id='name' type='text' list='ingredients' onChange={e => this.updateIngredient(e.target.value)}/>
+                    <datalist id='ingredients'>
+                        {ingredients.map(ingredient => 
+                            <option value={ingredient.name} key={ingredient.id} />
+                        )}
+                    </datalist>
                     <ValidationError hasError={!this.state.ingredientValid} message={this.state.validationMessage}/>
                 </div>
-                <button type='submit'>Add ingredient</button>
+                <button type='submit' disabled={!this.state.formValid}>Add ingredient</button>
             </form>
         )
     }
