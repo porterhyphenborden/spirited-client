@@ -1,43 +1,48 @@
 import React, { Component } from 'react';
 import SpiritedContext from '../../SpiritedContext';
+import './AddCocktailForm.css'
+import IngredientRow from '../IngredientRow/IngredientRow';
 //import SpiritedApiService from '../../services/spirited-api-service';
 
 export default class AddCocktailForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            count: 1,
+            ingredients: [],
+        }
+    }
 
     static contextType = SpiritedContext;
 
-    RenderIngredients() {
-        const { units, ingredients } = this.props;
+    updateIngredientName= (ingredientName, id) => {
+        this.setState({ingredientName});
+    }
+
+    RenderIngredientsRows(count) {
+        let rows = [];
+        for (let i = 0; i < count; i++) {
+            rows.push(<IngredientRow units={this.props.units} ingredients={this.props.ingredients} key={i} id={i+1} />)
+        }
         return (
-            <div className='ingredient-form-group'>
-                <div className='form-group'>
-                    <label htmlFor='amount'>Amount</label>
-                    <input name='amount' id='amount' type='text' />
-                </div>
-                <div className='form-group'>
-                    <label htmlFor='unit'>Unit</label>
-                    <input name='unit' id='unit' list='units' />
-                    <datalist id='units'>
-                        {units.map(unit => 
-                            <option value={unit.unit_name} key={unit.id} />
-                        )}
-                    </datalist>
-                </div>
-                <div className='form-group'>
-                    <label htmlFor='ingredient'>Ingredient</label>
-                    <input name='ingredient' id='ingredient' list='ingredients' />
-                    <datalist id='ingredients'>
-                        {ingredients.map(ingredient => 
-                            <option value={ingredient.name} key={ingredient.id} />
-                        )}
-                    </datalist>
-                </div>
-            </div>
+            <>
+                {rows}
+            </>
         )
     }
 
-    render() {
+    AddIngredientsRow(event) {
+        event.preventDefault();
+        let count = this.state.count;
+        count += 1;
+        this.setState({
+            count: count,
+        })
+    }
 
+    render() {
+        let count = this.state.count;
+        let ingredients = this.RenderIngredientsRows(count);
         return (
             <form className='add-cocktail'>
                 <h2>Add a new cocktail</h2>
@@ -53,7 +58,8 @@ export default class AddCocktailForm extends Component {
                     <label htmlFor='credit'>Created by</label>
                     <input name='credit' id='credit' type='text' />
                 </div>
-                {this.RenderIngredients()}
+                {ingredients}
+                <button onClick={e => this.AddIngredientsRow(e)}>+</button>
                 <div className='form-group'>
                     <label htmlFor='instructions'>Instructions</label>
                     <textarea name='instructions' id='instructions' />

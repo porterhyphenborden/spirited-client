@@ -30,12 +30,9 @@ export default class AddIngredientForm extends Component {
         let fieldError = this.state.validationMessage;
         const ingredientsList = this.props.ingredients;
         const ingredientsListLower = ingredientsList.map(ing => ing.name.toLowerCase());
-        console.log(ingredientsListLower);
         let hasError = false;
         fieldValue = fieldValue.trim().toLowerCase();
-        console.log(fieldValue);
         const found = ingredientsListLower.some(ing => ing === fieldValue);
-        console.log(found);
         
         if (fieldValue.length === 0) {
             fieldError = 'Ingredient name is required.';
@@ -58,7 +55,7 @@ export default class AddIngredientForm extends Component {
 
     formValid() {
         this.setState({
-            ingredientValid: this.state.ingredientValid,
+            formValid: this.state.ingredientValid,
         });
     }
 
