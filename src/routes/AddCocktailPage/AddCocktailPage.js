@@ -49,6 +49,7 @@ export default class AddCocktailPage extends Component {
                 <AddCocktailForm 
                     units={units}
                     ingredients={ingredients}
+                    history={this.props.history}
                 />
                 <AddIngredientForm 
                     ingredients={ingredients}

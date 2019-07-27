@@ -6,11 +6,11 @@ export default function IngredientRow(props) {
         <div className='ingredient-form-group'>
             <div className='form-group'>
                 <label htmlFor='amount'>Amount</label>
-                <input name='amount' id={'amount' + props.id} type='text' />
+                <input name='amount' id={'amount' + props.id} type='text' onChange={(e) => props.onUpdateAmount(props.id, e.target.value)} />
             </div>
             <div className='form-group'>
                 <label htmlFor='unit'>Unit</label>
-                <input name='unit' id={'unit' + props.id} list='units' />
+                <input name='unit' id={'unit' + props.id} list='units' onChange={(e) => props.onUpdateUnit(props.id, e.target.value)} />
                 <datalist id='units'>
                     {units.map(unit => 
                         <option value={unit.unit_name} key={unit.id} />
@@ -19,7 +19,7 @@ export default function IngredientRow(props) {
             </div>
             <div className='form-group'>
                 <label htmlFor='ingredient'>Ingredient</label>
-                <input name='ingredient' id={'ingredient' + props.id} list='ingredients' />
+                <input name='ingredient' id={'ingredient' + props.id} list='ingredients' onChange={(e) => props.onUpdateName(props.id, e.target.value)} />
                 <datalist id='ingredients'>
                     {ingredients.map(ingredient => 
                         <option value={ingredient.name} key={ingredient.id} />

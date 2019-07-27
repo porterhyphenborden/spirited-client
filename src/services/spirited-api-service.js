@@ -1,4 +1,6 @@
+import TokenService from '../services/token-service'
 import config from '../config'
+
 
 const SpiritedApiService = {
     getCocktails(searchKey, searchTerm) {
@@ -66,6 +68,7 @@ const SpiritedApiService = {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
             },
             body: JSON.stringify({
                 name: ingredient
@@ -77,6 +80,50 @@ const SpiritedApiService = {
                     : res.json()
             )
     },
+    postcocktail(cocktail) {
+        return fetch(`${config.API_ENDPOINT}/cocktails`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+            },
+            body: JSON.stringify(cocktail),
+        })
+            .then(res =>
+                (!res.ok)
+                    ? res.json().then(e => Promise.reject(e))
+                    : res.json()
+            )
+    },
+    postCocktailIngredient(ingredient) {
+        return fetch(`${config.API_ENDPOINT}/cocktail-ingredients`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+            },
+            body: JSON.stringify(ingredient),
+        })
+            .then(res =>
+                (!res.ok)
+                    ? res.json().then(e => Promise.reject(e))
+                    : res.json()
+            )
+    },
+    postUser(user) {
+        return fetch(`${config.API_ENDPOINT}/users`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(user),
+        })
+            .then(res =>
+                (!res.ok)
+                    ? res.json().then(e => Promise.reject(e))
+                    : res.json()
+            )
+    }
 }
 
 export default SpiritedApiService;

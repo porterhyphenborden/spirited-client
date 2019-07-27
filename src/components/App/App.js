@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Header from '../Header/Header';
-import Navigation from '../Navigation/Navigation'
+import PrivateRoute from '../utils/PrivateRoute'
+import PublicOnlyRoute from '../utils/PublicOnlyRoute'
+import PublicNav from '../Navigation/PublicNav'
+import PrivateNav from '../Navigation/PrivateNav'
 import LandingPage from '../../routes/LandingPage/LandingPage'
 import SearchPage from '../../routes/SearchPage/SearchPage'
 import CocktailPage from '../../routes/CocktailPage/CocktailPage'
 import AddCocktailPage from '../../routes/AddCocktailPage/AddCocktailPage'
+import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage'
+import LoginPage from '../../routes/LoginPage/LoginPage'
+import UserLandingPage from '../../routes/UserLandingPage/UserLandingPage';
 
 class App extends Component {
 
@@ -13,9 +19,11 @@ class App extends Component {
 
     return (
       <div className='app'>
-        <Header />
+        <header>
+          <Header />
+        </header>
         <nav role='navigation'>
-          {/* <Route 
+          <Route 
             exact path='/'
             component={PublicNav}
           />
@@ -34,8 +42,15 @@ class App extends Component {
           <Route 
             exact path='/cocktail/:cocktailId'
             component={PublicNav}
-          /> */}
-          <Navigation />
+          />
+          <Route 
+            exact path='/my-cocktails'
+            component={PrivateNav}
+          />
+          <Route 
+            exact path='/add-cocktail'
+            component={PrivateNav}
+          />
         </nav>
         <main>
           <Switch>
@@ -51,18 +66,23 @@ class App extends Component {
               exact path='/cocktails/:cocktailId'
               component={CocktailPage}
             />
-            <Route 
+            <PrivateRoute 
               exact path='/add-cocktail'
               component={AddCocktailPage}
             />
-            {/* <Route 
-              exact path='/login'
-              component={LoginPage}
+            <PrivateRoute 
+              exact path='/my-cocktails'
+              component={UserLandingPage}
             />
-            <Route 
+            <PublicOnlyRoute 
               exact path='/register'
               component={RegistrationPage}
             />
+            <PublicOnlyRoute 
+              exact path='/login'
+              component={LoginPage}
+            />
+            {/* 
             <Route
               component={NotFoundPage}
             /> */}

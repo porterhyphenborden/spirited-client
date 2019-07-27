@@ -90,8 +90,6 @@ export default class CocktailSearchForm extends Component {
     }
 
     render() {
-        const [ cocktails ] = this.context.cocktails;
-        console.log(cocktails);
         return (
             <form className='cocktail-search' onSubmit={e => this.handleSubmit(e)}>
                 <h2>Search for cocktails</h2>
