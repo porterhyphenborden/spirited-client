@@ -5,7 +5,7 @@ nav.main-nav {
 }
 
 nav.main-nav a:link {
-    border: 1px solid black;
+    border: 1px solid rgb(0, 45, 63);
     border-radius: 2px;
     padding: 2px 5px;
     text-align: center;

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import SpiritedApiService from '../../services/spirited-api-service'
 import SpiritedContext from '../../SpiritedContext'
+import './CocktailPage.css'
 
 export default class CocktailPage extends Component {
     static defaultProps = {
@@ -12,7 +13,6 @@ export default class CocktailPage extends Component {
 
     componentDidMount() {
         const { cocktailId } = this.props.match.params;
-        console.log(cocktailId)
         SpiritedApiService.getCocktail(cocktailId)
             .then((cocktail) => {
                 this.context.setCurrentCocktail(cocktail)

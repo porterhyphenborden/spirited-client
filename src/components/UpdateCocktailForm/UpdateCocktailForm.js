@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-import SpiritedContext from '../../SpiritedContext';
-import ValidationError from '../ValidationError';
-import IngredientRow from '../IngredientRow/IngredientRow';
-import SpiritedApiService from '../../services/spirited-api-service';
+import React, { Component } from 'react'
+import SpiritedContext from '../../SpiritedContext'
+import ValidationError from '../ValidationError'
+import IngredientRow from '../IngredientRow/IngredientRow'
+import SpiritedApiService from '../../services/spirited-api-service'
+import './UpdateCocktailForm.css'
 
 export default class UpdateCocktailForm extends Component {
     constructor(props) {
@@ -48,6 +49,8 @@ export default class UpdateCocktailForm extends Component {
         history: {
           push: () => { }
         },
+        ingredients: [],
+        units: [],
     }
 
     static contextType = SpiritedContext;
@@ -92,7 +95,7 @@ export default class UpdateCocktailForm extends Component {
     }
 
     updateCreatedBy(createdBy) {
-        this.setState({ createdBy, cocktailHasChanged: true });
+        this.setState({ createdBy, cocktailHasChanged: true }, this.formValid );
     }
 
     updateQuantity = (id, quantity) => {
@@ -151,19 +154,19 @@ export default class UpdateCocktailForm extends Component {
     }
 
     updateGarnish(garnish) {
-        this.setState({garnish, cocktailHasChanged: true });
+        this.setState({garnish, cocktailHasChanged: true }, this.formValid );
     }
 
     updateGlass(glass) {
-        this.setState({glass, cocktailHasChanged: true });
+        this.setState({glass, cocktailHasChanged: true }, this.formValid);
     }
 
     updateNotes(notes) {
-        this.setState({notes, cocktailHasChanged: true });
+        this.setState({notes, cocktailHasChanged: true }, this.formValid);
     }
 
     updateIngInstructions(ingredientInstructions) {
-        this.setState({ingredientInstructions, cocktailHasChanged: true });
+        this.setState({ingredientInstructions, cocktailHasChanged: true, otherFieldsValid: true  });
     }
 
     validateName(fieldValue) {
@@ -429,6 +432,7 @@ export default class UpdateCocktailForm extends Component {
                     onUpdateAmount={this.updateQuantity}
                     onUpdateUnit={this.updateIngredientUnit}
                     onUpdateName={this.updateIngredientName}
+                    onDeleteNewRow={this.DeleteNewIngredientsRow}
                 />)
         }
         return (
@@ -436,6 +440,25 @@ export default class UpdateCocktailForm extends Component {
                 {rows}
             </>
         )
+    }
+
+    DeleteNewIngredientsRow = (event, id) => {
+        event.preventDefault();
+        let count = this.state.count;
+        count -= 1;
+        if (count >= 1) {
+            this.setState(state => {
+                const newIngredients = state.newIngredients
+                newIngredients.splice(id, 1)
+                return {
+                    newIngredients,
+                    count: count,
+                };
+            });
+        }
+        else {
+            this.setState({ count })
+        }
     }
 
     AddIngredientsRow(event) {
@@ -458,7 +481,7 @@ export default class UpdateCocktailForm extends Component {
         else {
             this.setState({ count })
         }
-    };
+    }
 
     render() {
         const { cocktailName, description, createdBy, instructions, garnish, glass, notes, ingredientInstructions } = this.state
@@ -487,7 +510,7 @@ export default class UpdateCocktailForm extends Component {
                 <ValidationError hasError={!this.state.quantityValid} message={this.state.validationMessages.quantity}/>
                 <ValidationError hasError={!this.state.ingredientUnitValid} message={this.state.validationMessages.ingredientUnit}/>
                 <ValidationError hasError={!this.state.ingredientNameValid} message={this.state.validationMessages.ingredientName}/>
-                <button onClick={e => this.AddIngredientsRow(e)}>+</button>
+                <button className='add-row' onClick={e => this.AddIngredientsRow(e)}>+</button>
                 <div className='form-group'>
                     <label htmlFor='instructions'>Instructions</label>
                     <textarea name='instructions' id='instructions' value={instructions} onChange={e => this.updateInstructions(e.target.value)} />
@@ -509,7 +532,7 @@ export default class UpdateCocktailForm extends Component {
                     <label htmlFor='ingredient-instructions'>Instructions for ingredients</label>
                     <textarea name='ingredient-instructions' id='ingredient-instructions' value={ingredientInstructions} onChange={e => this.updateIngInstructions(e.target.value)} />
                 </div>
-                <button type='submit' disabled={!this.state.formValid}>Update</button>
+                <button type='submit' className='update-cocktail' disabled={!this.state.formValid}>Update</button>
             </form>
         )
     }

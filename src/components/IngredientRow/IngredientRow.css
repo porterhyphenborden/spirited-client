@@ -1,0 +1,39 @@
+div.ingredient-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+div.ingredient-row input {
+    margin: 2px 0 5px 0;
+}
+
+div.ingredient-form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+div.ingredient-form-group.amount {
+    width: 22%;
+}
+
+div.ingredient-form-group.unit {
+    width: 25%;
+}
+
+div.ingredient-form-group.ingredient {
+    width: 43%;
+}
+
+button.delete-row {
+    font-size: 22px;
+    line-height: 10px;
+    font-weight: bold;
+    padding: 0;
+    width: 22px;
+    height: 22px;
+    align-self: flex-end;
+    margin: 0 0 5px 0;
+    cursor: pointer;
+}

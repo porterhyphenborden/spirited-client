@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import CocktailSearchForm from '../../components/CocktailSearchForm/CocktailSearchForm'
 import CocktailList from '../../components/CocktailList/CocktailList'
-import SpiritedContext from '../../SpiritedContext';
+import SpiritedContext from '../../SpiritedContext'
 
 export default class SearchPage extends Component {
 
@@ -12,7 +12,7 @@ export default class SearchPage extends Component {
     }
 
     render() {
-        const cocktails = this.context.cocktails;
+        const cocktails = this.context.cocktails
         if (cocktails.length === 0) {
             return (
                 <>
@@ -24,7 +24,9 @@ export default class SearchPage extends Component {
             return (
                 <>
                     <CocktailSearchForm />
-                    <CocktailList />
+                    <CocktailList 
+                        cocktails={cocktails}
+                    />
                 </>
             )
         }

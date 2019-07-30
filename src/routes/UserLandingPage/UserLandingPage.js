@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SpiritedContext from '../../SpiritedContext';
 import SpiritedApiService from '../../services/spirited-api-service';
-import UserCocktailList from '../../components/UserCocktailList/UserCocktailList'
+import CocktailList from '../../components/CocktailList/CocktailList'
 // import { Link } from 'react-router-dom';
 
 export default class UserLandingPage extends Component {
@@ -19,10 +19,13 @@ export default class UserLandingPage extends Component {
     }
 
     render() {
+        const cocktails = this.context.userCocktails
         return (
             <div className='user-cocktails'>
                 <h2>My Cocktails</h2>
-                <UserCocktailList />
+                <CocktailList 
+                    cocktails={cocktails}
+                />
             </div>
             
         )

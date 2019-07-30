@@ -1,4 +1,14 @@
 ul.cocktail-results {
     list-style: none;
     padding: 0;
+    margin: 0;
+}
+
+ul.cocktail-results li p{
+    margin: 0;
+    padding: 0;
+}
+
+h3 {
+    margin: 15px 0 5px 0;
 }

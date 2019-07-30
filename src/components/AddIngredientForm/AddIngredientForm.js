@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ValidationError from '../ValidationError';
 import SpiritedApiService from '../../services/spirited-api-service';
 import SpiritedContext from '../../SpiritedContext';
+import './AddIngredientForm.css'
 
 export default class AddIngredientForm extends Component {
     constructor(props) {
@@ -18,6 +19,7 @@ export default class AddIngredientForm extends Component {
         history: {
           push: () => { }
         },
+        ingredients: [],
     }
 
     static contextType = SpiritedContext;
@@ -85,7 +87,7 @@ export default class AddIngredientForm extends Component {
                     </datalist>
                     <ValidationError hasError={!this.state.ingredientValid} message={this.state.validationMessage}/>
                 </div>
-                <button type='submit' disabled={!this.state.formValid}>Add ingredient</button>
+                <button type='submit' className='add-ingredient' disabled={!this.state.formValid}>Add ingredient</button>
             </form>
         )
     }

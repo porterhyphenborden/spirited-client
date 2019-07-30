@@ -1,32 +1,41 @@
-import React from 'react';
+import React, { Component } from 'react'
+import './IngredientRow.css'
 
-export default function IngredientRow(props) {
-    const { units, ingredients } = props;
-    return (
-        <div className='ingredient-form-group'>
-            <div className='form-group'>
-                <label htmlFor='amount'>Amount</label>
-                <input name='amount' id={'amount' + props.id} type='text' value={props.quantityValue} onChange={(e) => props.onUpdateAmount(props.id, e.target.value)} />
+export default class IngredientRow extends Component  {
+    static defaultProps = {
+        units: [],
+        ingredients: [],
+    }
+
+    render() {
+        const { units, ingredients } = this.props;
+        return (
+            <div className='ingredient-row'>
+                <div className='ingredient-form-group amount'>
+                    <label htmlFor='amount'>Amount</label>
+                    <input name='amount' className='amount' id={'amount' + this.props.id} type='text' value={this.props.quantityValue} onChange={(e) => this.props.onUpdateAmount(this.props.id, e.target.value)} />
+                </div>
+                <div className='ingredient-form-group unit'>
+                    <label htmlFor='unit'>Unit</label>
+                    <input name='unit' className='unit' id={'unit' + this.props.id} list='units' value={this.props.unitValue} onChange={(e) => this.props.onUpdateUnit(this.props.id, e.target.value)} />
+                    <datalist id='units'>
+                        {units.map(unit => 
+                            <option value={unit.unit_name} key={unit.id} />
+                        )}
+                    </datalist>
+                </div>
+                <div className='ingredient-form-group ingredient'>
+                    <label htmlFor='ingredient'>Ingredient</label>
+                    <input name='ingredient' className='ingredient' id={'ingredient' + this.props.id} list='ingredients' value={this.props.nameValue} onChange={(e) => this.props.onUpdateName(this.props.id, e.target.value)} />
+                    <datalist id='ingredients'>
+                        {ingredients.map(ingredient => 
+                            <option value={ingredient.name} key={ingredient.id} />
+                        )}
+                    </datalist>
+                </div>
+                {this.props.onDeleteRow && <button className='delete-row' onClick={(e) => this.props.onDeleteRow(this.props.ciID, this.props.id, e)}>-</button>}
+                {this.props.onDeleteNewRow && <button className='delete-row' onClick={(e) => this.props.onDeleteNewRow(e, this.props.id)}>-</button>}
             </div>
-            <div className='form-group'>
-                <label htmlFor='unit'>Unit</label>
-                <input name='unit' id={'unit' + props.id} list='units' value={props.unitValue} onChange={(e) => props.onUpdateUnit(props.id, e.target.value)} />
-                <datalist id='units'>
-                    {units.map(unit => 
-                        <option value={unit.unit_name} key={unit.id} />
-                    )}
-                </datalist>
-            </div>
-            <div className='form-group'>
-                <label htmlFor='ingredient'>Ingredient</label>
-                <input name='ingredient' id={'ingredient' + props.id} list='ingredients' value={props.nameValue} onChange={(e) => props.onUpdateName(props.id, e.target.value)} />
-                <datalist id='ingredients'>
-                    {ingredients.map(ingredient => 
-                        <option value={ingredient.name} key={ingredient.id} />
-                    )}
-                </datalist>
-            </div>
-            {props.onDeleteRow && <button onClick={(e) => props.onDeleteRow(props.ciID, props.id, e)}>Delete</button>}
-        </div>
-    )
+        )
+    }
 }

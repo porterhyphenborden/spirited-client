@@ -1,0 +1,18 @@
+form.add-ingredient {
+    font-size: 16px;
+}
+
+form.add-ingredient div.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+form.add-ingredient input {
+    margin-bottom: 5px;
+}
+
+form.add-ingredient button.add-ingredient {
+    display: block;
+    margin: 0 auto;
+    font-size: 18px;
+}

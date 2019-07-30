@@ -14,8 +14,12 @@ h1 {
     margin: 10px 0;
 }
 
+.header-nav a:link {
+    border: none;
+}
+
 .header-links a:link {
-    border: 1px solid black;
+    border: 1px solid rgb(0, 45, 63);
     border-radius: 4px;
     padding: 2px 5px;
 }

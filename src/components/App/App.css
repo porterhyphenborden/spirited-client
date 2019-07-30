@@ -1,14 +1,38 @@
 * {
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
+    color: rgb(0, 45, 63);
 }
 
 .app {
-    margin: 20px;
+    margin: 10px;
+}
+
+h2 {
+    font-size: 22px;
+    margin: 15px 0 10px 0;
+}
+
+div.error {
+    font-size: 16px;
+    font-weight: bolder;
+    color: rgb(135, 8, 61);
+}
+
+button {
+    cursor: pointer;
 }
 
 a:link {
     text-decoration: none;
+}
+
+a:visited {
+    color: rgb(0, 45, 63);
+}
+
+a:hover {
+    color: rgb(135, 8, 61);
 }
 
 @media screen and (min-width: 750px) {

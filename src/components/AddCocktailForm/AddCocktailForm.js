@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import SpiritedContext from '../../SpiritedContext';
 import ValidationError from '../ValidationError';
-import './AddCocktailForm.css'
 import IngredientRow from '../IngredientRow/IngredientRow';
 import SpiritedApiService from '../../services/spirited-api-service';
+import './AddCocktailForm.css'
 
 export default class AddCocktailForm extends Component {
     constructor(props) {
@@ -45,6 +45,8 @@ export default class AddCocktailForm extends Component {
         history: {
           push: () => { }
         },
+        units: [],
+        ingredients: [],
     }
 
     static contextType = SpiritedContext;
@@ -306,6 +308,7 @@ export default class AddCocktailForm extends Component {
                     onUpdateAmount={this.updateQuantity}
                     onUpdateUnit={this.updateIngredientUnit}
                     onUpdateName={this.updateIngredientName}
+                    onDeleteNewRow={this.DeleteNewIngredientsRow}
                 />)
         }
         return (
@@ -313,6 +316,25 @@ export default class AddCocktailForm extends Component {
                 {rows}
             </>
         )
+    }
+
+    DeleteNewIngredientsRow = (event, id) => {
+        event.preventDefault();
+        let count = this.state.count;
+        count -= 1;
+        if (count >= 1) {
+            this.setState(state => {
+                const ingredients = state.ingredients
+                ingredients.splice(id, 1)
+                return {
+                    ingredients,
+                    count: count,
+                };
+            });
+        }
+        else {
+            this.setState({ count })
+        }
     }
 
     AddIngredientsRow(event) {
@@ -356,7 +378,7 @@ export default class AddCocktailForm extends Component {
                 <ValidationError hasError={!this.state.quantityValid} message={this.state.validationMessages.quantity}/>
                 <ValidationError hasError={!this.state.ingredientUnitValid} message={this.state.validationMessages.ingredientUnit}/>
                 <ValidationError hasError={!this.state.ingredientNameValid} message={this.state.validationMessages.ingredientName}/>
-                <button onClick={e => this.AddIngredientsRow(e)}>+</button>
+                <button className='add-row' onClick={e => this.AddIngredientsRow(e)}>+</button>
                 <div className='form-group'>
                     <label htmlFor='instructions'>Instructions</label>
                     <textarea name='instructions' id='instructions' onChange={e => this.updateInstructions(e.target.value)} />
@@ -378,7 +400,7 @@ export default class AddCocktailForm extends Component {
                     <label htmlFor='ingredient-instructions'>Instructions for ingredients</label>
                     <textarea name='ingredient-instructions' id='ingredient-instructions' placeholder='For thyme simple, mix 4 sprigs thyme, 1 cup sugar...' onChange={e => this.updateIngInstructions(e.target.value)} />
                 </div>
-                <button type='submit' disabled={!this.state.formValid}>Add cocktail</button>
+                <button type='submit' className='add-cocktail' disabled={!this.state.formValid}>Add cocktail</button>
             </form>
         )
     }

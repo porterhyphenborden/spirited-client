@@ -60,7 +60,7 @@ export default class RegistrationForm extends Component {
                 </div>
                 <button type='submit'>Register</button>
                 <div role='alert'>
-                    {error && <p className='error'>{error}</p>}
+                    {error && <div className='error'>{error}</div>}
                 </div>
             </form>
         )

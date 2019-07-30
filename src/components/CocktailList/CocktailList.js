@@ -4,20 +4,23 @@ import SpiritedContext from '../../SpiritedContext'
 import './CocktailList.css'
 
 export default class CocktailList extends Component {
+    static defaultProps = {
+        cocktails: [],
+    }
 
     static contextType = SpiritedContext;
 
     render() {
-        const { cocktails=[] } = this.context;
+        const cocktails = this.props.cocktails;
         return (
             <ul className='cocktail-results'>
                 {cocktails.map(cocktail =>
                     <li className='cocktail-result' key={cocktail.id}>
-                        <h4>
+                        <h3>
                             <Link to={`/cocktails/${cocktail.id}`}>
                                 {cocktail.name}
                             </Link>
-                        </h4>
+                        </h3>
                         <p>{cocktail.description}</p>
                     </li>
                 )}

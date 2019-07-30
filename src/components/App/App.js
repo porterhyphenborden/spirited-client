@@ -12,6 +12,7 @@ import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage'
 import LoginPage from '../../routes/LoginPage/LoginPage'
 import UserLandingPage from '../../routes/UserLandingPage/UserLandingPage'
 import UpdateCocktailPage from '../../routes/UpdateCocktailPage/UpdateCocktailPage'
+import NotFoundPage from '../../routes/NotFoundPage/NotFoundPage'
 import './App.css'
 
 class App extends Component {
@@ -40,7 +41,7 @@ class App extends Component {
               component={LandingPage}
             />
             <Route 
-              exact path='/cocktail-search'
+              path='/cocktail-search'
               component={SearchPage}
             />
             <Route 
@@ -52,7 +53,7 @@ class App extends Component {
               component={CocktailPage}
             />
             <PrivateRoute 
-              exact path='/add-cocktail'
+              path='/add-cocktail'
               component={AddCocktailPage}
             />
             <PrivateRoute 
@@ -64,17 +65,16 @@ class App extends Component {
               component={UpdateCocktailPage}
             />
             <PublicOnlyRoute 
-              exact path='/register'
+              path='/register'
               component={RegistrationPage}
             />
             <PublicOnlyRoute 
               exact path='/login'
               component={LoginPage}
-            />
-            {/* 
+            /> 
             <Route
               component={NotFoundPage}
-            /> */}
+            />
           </Switch>
         </main>
       </div>

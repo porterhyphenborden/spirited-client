@@ -44,7 +44,7 @@ export default class LoginForm extends Component {
                 </div>
                 <button type='submit'>Login</button>
                 <div role='alert'>
-                    {error && <p className='error'>{error}</p>}
+                    {error && <div className='error'>{error}</div>}
                 </div>
             </form>
         )
