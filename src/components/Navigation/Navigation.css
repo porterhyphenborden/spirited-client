@@ -1,0 +1,26 @@
+nav.main-nav {
+    display: flex;
+    flex-direction: column;
+
+}
+
+nav.main-nav a:link {
+    border: 1px solid black;
+    border-radius: 2px;
+    padding: 2px 5px;
+    text-align: center;
+    margin-top: 5px;
+    height: 100%;
+}
+
+@media screen and (min-width: 600px) {
+    nav.main-nav {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    nav.main-nav a:link {
+        width: 33%
+    }
+}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SpiritedContext from '../../SpiritedContext';
 import SpiritedApiService from '../../services/spirited-api-service';
 import ValidationError from '../ValidationError';
+import './CocktailSearchForm.css'
 
 export default class CocktailSearchForm extends Component {
     constructor(props) {
@@ -15,11 +16,16 @@ export default class CocktailSearchForm extends Component {
             validationMessages: {
                 searchKey: '',
                 searchTerm: ''
-            }
+            },
+            error: null,
         }
     }
 
     static contextType = SpiritedContext;
+
+    componentDidMount() {
+        this.setState({ error: null })
+    }
 
     updateSearchKey(searchKey) {
         this.setState({searchKey}, () => {this.validateKey(searchKey)});
@@ -77,19 +83,24 @@ export default class CocktailSearchForm extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        this.setState({ error: null })
         const searchKey = this.state.searchKey;
         const searchTerm = this.state.searchTerm;
         SpiritedApiService.getCocktails(searchKey, searchTerm)
             .then((cocktails) => {
-                this.context.setCocktailList(cocktails)
                 console.log(cocktails)
+                if (cocktails.length === 0) {
+                    this.setState({ error: 'Your search returned no results.' })
+                }
+                this.context.setCocktailList(cocktails)
             })
-            .catch(error => {
-                console.error({ error })
+            .catch(res => {
+                this.setState({ error: res.error })
             })
     }
 
     render() {
+        const { error } = this.state
         return (
             <form className='cocktail-search' onSubmit={e => this.handleSubmit(e)}>
                 <h2>Search for cocktails</h2>
@@ -108,6 +119,9 @@ export default class CocktailSearchForm extends Component {
                     <ValidationError hasError={!this.state.searchTermValid} message={this.state.validationMessages.searchTerm}/>
                 </div>
                 <button className='cocktail-search' type='submit' disabled={!this.state.formValid}>Search</button>
+                <div role='alert'>
+                    {error && <p className='error'>{error}</p>}
+                </div>
             </form>
         )
     }

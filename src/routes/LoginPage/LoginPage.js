@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import LoginForm from '../../components/LoginForm/LoginForm'
+import SpiritedContext from '../../SpiritedContext'
 
 export default class LoginPage extends Component {
     static defaultProps = {
@@ -9,8 +10,11 @@ export default class LoginPage extends Component {
         },
     }
 
+    static contextType = SpiritedContext;
+
     handleLoginSuccess = () => {
         this.props.history.push('/my-cocktails')
+        this.context.setIsLoggedIn()
     }
 
     render() {

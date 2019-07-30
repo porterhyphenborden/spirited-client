@@ -1,16 +1,9 @@
 import React, { Component } from 'react'
-import SpiritedApiService from '../../services/spirited-api-service'
 import AuthApiService from '../../services/auth-api-service'
+import './RegistrationForm.css'
 
 export default class RegistrationForm extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            full_name: '',
-            username: '',
-            password: '',
-        }
-    }
+    state = { error: null }
 
     static defaultProps = {
       onRegistrationSuccess: () => {}
@@ -30,29 +23,32 @@ export default class RegistrationForm extends Component {
 
     handleSubmit = ev => {
         ev.preventDefault()
-        const user = { 
-            full_name: this.state.full_name, 
-            username: this.state.username, 
-            password: this.state.password 
-        }
-    
-        AuthApiService.postUser(user)
+        const { fullname, username, password } = ev.target
+
+        this.setState({ error: null })
+        AuthApiService.postUser({
+            username: username.value,
+            password: password.value,
+            full_name: fullname.value,
+          })
             .then(user => {
+                fullname.value = ''
+                username.value = ''
+                password.value = ''
                 this.props.onRegistrationSuccess()
             })
-            .catch(error => {
-                console.error({ error })
+            .catch(res => {
+                this.setState({ error: res.error })
             })
     }
 
     render() {
-
+        const { error } = this.state
         return (
             <form className='registration-form' onSubmit={this.handleSubmit}>
                 <div className='form-group'>
                     <label htmlFor='full-name'>Full Name</label>
-                    <input type='full-name' name='full-name' id='full-name' onChange={e => this.updateFullName(e.target.value)} />
-
+                    <input type='full-name' name='full-name' id='fullname' onChange={e => this.updateFullName(e.target.value)} />
                 </div>
                 <div className='form-group'>
                     <label htmlFor='username'>Username</label>
@@ -63,6 +59,9 @@ export default class RegistrationForm extends Component {
                     <input type='password' name='password' id='password' onChange={e => this.updatePassword(e.target.value)}  />
                 </div>
                 <button type='submit'>Register</button>
+                <div role='alert'>
+                    {error && <p className='error'>{error}</p>}
+                </div>
             </form>
         )
     }

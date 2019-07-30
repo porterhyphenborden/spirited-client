@@ -1,58 +1,39 @@
-import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import Header from '../Header/Header';
+import React, { Component } from 'react'
+import { Route, Switch } from 'react-router-dom'
+import Header from '../Header/Header'
 import PrivateRoute from '../utils/PrivateRoute'
 import PublicOnlyRoute from '../utils/PublicOnlyRoute'
-import PublicNav from '../Navigation/PublicNav'
-import PrivateNav from '../Navigation/PrivateNav'
+import Navigation from '../Navigation/Navigation'
 import LandingPage from '../../routes/LandingPage/LandingPage'
 import SearchPage from '../../routes/SearchPage/SearchPage'
 import CocktailPage from '../../routes/CocktailPage/CocktailPage'
 import AddCocktailPage from '../../routes/AddCocktailPage/AddCocktailPage'
 import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage'
 import LoginPage from '../../routes/LoginPage/LoginPage'
-import UserLandingPage from '../../routes/UserLandingPage/UserLandingPage';
+import UserLandingPage from '../../routes/UserLandingPage/UserLandingPage'
+import UpdateCocktailPage from '../../routes/UpdateCocktailPage/UpdateCocktailPage'
+import './App.css'
 
 class App extends Component {
 
-  render() {
+  state = { hasError: false }
 
+  static getDerivedStateFromError(error) {
+    console.error(error)
+    return { hasError: true }
+  }
+
+  render() {
     return (
       <div className='app'>
         <header>
           <Header />
         </header>
-        <nav role='navigation'>
-          <Route 
-            exact path='/'
-            component={PublicNav}
-          />
-          <Route 
-            exact path='/login'
-            component={PublicNav}
-          />
-          <Route 
-            exact path='/register'
-            component={PublicNav}
-          />
-          <Route 
-            exact path='/cocktail-search'
-            component={PublicNav}
-          />
-          <Route 
-            exact path='/cocktail/:cocktailId'
-            component={PublicNav}
-          />
-          <Route 
-            exact path='/my-cocktails'
-            component={PrivateNav}
-          />
-          <Route 
-            exact path='/add-cocktail'
-            component={PrivateNav}
-          />
+        <nav className='main-nav' role='navigation'>
+          <Navigation />
         </nav>
         <main>
+        {this.state.hasError && <p className='error'>There was an error! Please try again later.</p>}
           <Switch>
             <Route 
               exact path='/'
@@ -67,12 +48,20 @@ class App extends Component {
               component={CocktailPage}
             />
             <PrivateRoute 
+              exact path='/my-cocktails/:cocktailId'
+              component={CocktailPage}
+            />
+            <PrivateRoute 
               exact path='/add-cocktail'
               component={AddCocktailPage}
             />
             <PrivateRoute 
               exact path='/my-cocktails'
               component={UserLandingPage}
+            />
+            <PrivateRoute 
+              exact path='/my-cocktails/:cocktailId/update'
+              component={UpdateCocktailPage}
             />
             <PublicOnlyRoute 
               exact path='/register'

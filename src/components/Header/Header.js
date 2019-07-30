@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import SpiritedContext from '../../SpiritedContext'
 import TokenService from '../../services/token-service'
+import './Header.css'
 
 export default class Header extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {}
-    }
+    
+    static contextType = SpiritedContext;
 
     handleLogoutClick = () => {
         TokenService.clearAuthToken()
-        this.setState({})
+        this.context.setIsLoggedIn()
     }
 
     renderLogoutLink() {
         return (
-            <div className='header-logged-in'>
+            <div className='header-links'>
                 <Link
                     onClick={this.handleLogoutClick}
                     to='/'>
@@ -27,7 +27,7 @@ export default class Header extends Component {
     
     renderLoginLink() {
         return (
-            <div className='header-not-logged-in'>
+            <div className='header-links'>
                 <Link
                     to='/register'>
                     Register
@@ -43,13 +43,11 @@ export default class Header extends Component {
 
     render() {
         return (
-            <nav className='header'>
-                <h1>
-                    <Link to='/'>
-                        Spirited
-                    </Link>
-                </h1>
-                {TokenService.hasAuthToken()
+            <nav className='header-nav'>
+                <Link to='/'>
+                    <h1>Spirited</h1>
+                </Link>
+                {(this.context.isLoggedIn)
                     ? this.renderLogoutLink()
                     : this.renderLoginLink()}
             </nav>

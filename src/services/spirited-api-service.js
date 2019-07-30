@@ -123,7 +123,65 @@ const SpiritedApiService = {
                     ? res.json().then(e => Promise.reject(e))
                     : res.json()
             )
-    }
+    },
+    getUserCocktails() {
+        return fetch(`${config.API_ENDPOINT}/my-cocktails`, {
+            method: 'GET',
+            headers: {
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+            },
+        })
+            .then(res =>
+                (!res.ok)
+                    ? res.json().then(e => Promise.reject(e))
+                    : res.json()
+            )
+    },
+    patchCocktail(cocktail, id) {
+        return fetch(`${config.API_ENDPOINT}/cocktails/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(cocktail),
+        })
+            .then(res =>
+                (!res.ok)
+                    ? res.text().then(e => Promise.reject(e))
+                    : res.text()
+            )
+    },
+    patchCocktailIngredient(ingredient, ciID) {
+        const newIngredient = {
+            ingredient_id: ingredient.id,
+            unit: ingredient.unit,
+            quantity: ingredient.quantity,
+        }
+        return fetch(`${config.API_ENDPOINT}/cocktail-ingredients/${ciID}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(newIngredient),
+        })
+            .then(res =>
+                (!res.ok)
+                    ? res.text().then(e => Promise.reject(e))
+                    : res.text()
+            )
+    },
+    deleteCocktailIngredient(id) {
+        return fetch(`${config.API_ENDPOINT}/cocktail-ingredients/${id}`, {
+            method: 'DELETE',
+            headers: {
+            },
+        })
+            .then(res =>
+                (!res.ok)
+                    ? res.text().then(e => Promise.reject(e))
+                    : res.text()
+            )
+    },
 }
 
 export default SpiritedApiService;

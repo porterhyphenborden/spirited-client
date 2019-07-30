@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import SpiritedApiService from '../../services/spirited-api-service'
-import SpiritedContext from '../../SpiritedContext';
+import SpiritedContext from '../../SpiritedContext'
 
 export default class CocktailPage extends Component {
     static defaultProps = {
         match: { params: {} },
     }
 
-    static contextType = SpiritedContext;
+    static contextType = SpiritedContext
 
     componentDidMount() {
         const { cocktailId } = this.props.match.params;
@@ -32,7 +33,7 @@ export default class CocktailPage extends Component {
         const cocktail = this.context.currentCocktail;
         const ingredients = this.context.cocktailIngredients;
         return (
-            <section className='cocktail-recipe'>
+            <div className='cocktail-recipe'>
                 <h3>{cocktail.name}</h3>
                 <p>{cocktail.description}</p>
                 {cocktail.created_by && 
@@ -45,7 +46,18 @@ export default class CocktailPage extends Component {
                     )}
                 </ul>
                 <p>Instructions: {cocktail.instructions}</p>
-            </section>
+                {cocktail.garnish &&
+                    <p>Garnish: {cocktail.garnish}</p>}
+                {cocktail.glass &&
+                    <p>Glass: {cocktail.glass}</p>}
+                {cocktail.notes && 
+                    <p>Notes: {cocktail.notes}</p>}
+                {cocktail.ing_instructions &&
+                    <p>Ingredient Instructions: {cocktail.ing_instructions}</p>}
+                {cocktail.user_id && <Link to={`/my-cocktails/${cocktail.id}/update`}>
+                    Update Cocktail
+                </Link>}
+            </div>
         )
     }
 }

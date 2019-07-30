@@ -1,15 +1,18 @@
 import React, { Component } from 'react'
 import TokenService from '../../services/token-service'
 import AuthApiService from '../../services/auth-api-service'
-//import SpiritedApiService from '../../services/spirited-api-service'
+import './LoginForm.css'
 
 export default class LoginForm extends Component {
     static defaultProps = {
         onLoginSuccess: () => {}
     }
 
+    state = { error: null }
+
     handleSubmitJwtAuth = ev => {
         ev.preventDefault()
+        this.setState({ error: null })
         const { username, password } = ev.target
         
         AuthApiService.postLogin({
@@ -22,12 +25,13 @@ export default class LoginForm extends Component {
                 TokenService.saveAuthToken(res.authToken)
                 this.props.onLoginSuccess()
             })
-            .catch(error => {
-                console.error({ error })
+            .catch(res => {
+                this.setState({ error: res.error })
             })
       }
 
     render() {
+        const { error } = this.state
         return (
             <form className='login-form' onSubmit={this.handleSubmitJwtAuth} >
                 <div className='form-group'>
@@ -39,6 +43,9 @@ export default class LoginForm extends Component {
                     <input type='password' name='password' id='password' />
                 </div>
                 <button type='submit'>Login</button>
+                <div role='alert'>
+                    {error && <p className='error'>{error}</p>}
+                </div>
             </form>
         )
     }

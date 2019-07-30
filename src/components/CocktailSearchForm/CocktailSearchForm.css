@@ -1,0 +1,16 @@
+form.cocktail-search div.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+form.cocktail-search label, form.cocktail-search input, form.cocktail-search select {
+    display: block;
+} 
+
+button.cocktail-search {
+    display: block;
+    margin: 10px auto;
+    font-size: 18px;
+}
