@@ -9,6 +9,7 @@ export default class UpdateCocktailForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            error: null,
             cocktailId: this.props.cocktailId,
             count: 0,
             cocktailName: '',
@@ -59,7 +60,6 @@ export default class UpdateCocktailForm extends Component {
         const cocktailId = this.state.cocktailId;
         SpiritedApiService.getCocktail(cocktailId)
             .then((cocktail) => {
-                this.context.setCurrentCocktail(cocktail)
                 this.setState({
                     cocktailName: cocktail.name,
                     description: cocktail.description,
@@ -71,18 +71,17 @@ export default class UpdateCocktailForm extends Component {
                     ingredientInstructions: cocktail.ing_instructions,
                 })
             })
-            .catch(error => {
-                console.error({ error })
+            .catch(res => {
+                this.setState({ error: res.error })
             })
         SpiritedApiService.getIndredientsForCocktail(cocktailId)
             .then((currentIngredients) => {
-                this.context.setCurrentCocktailIng(currentIngredients)
                 this.setState({
                     currentIngredients
                 })
             })
-            .catch(error => {
-                console.error({ error })
+            .catch(res => {
+                this.setState({ error: res.error })
             })
     }
 
@@ -331,6 +330,9 @@ export default class UpdateCocktailForm extends Component {
                 .then(res => {
                     this.props.history.push(`/cocktails/${cocktailId}`)
                 })
+                .catch(res => {
+                    this.setState({ error: res.error })
+                })
         }
         if (this.state.newIngredients[0].ingredientName) {
                 const newIngredients = this.state.newIngredients;
@@ -353,12 +355,15 @@ export default class UpdateCocktailForm extends Component {
                     delete ing.ingredientUnit;
                     ing.cocktail_id = cocktailId;
                 })
-                console.log(newIngredients)
                 const promises = newIngredients.map(ing => {
                     return(SpiritedApiService.postCocktailIngredient(ing))
                 })
-                Promise.all(promises).then(res => {
-                    this.props.history.push(`/cocktails/${cocktailId}`)
+                Promise.all(promises)
+                    .then(res => {
+                        this.props.history.push(`/cocktails/${cocktailId}`)
+                    .catch(res => {
+                        this.setState({ error: res.error })
+                    })
                 })
             }
         if (this.state.ingredientsHaveChanged) {
@@ -378,12 +383,15 @@ export default class UpdateCocktailForm extends Component {
                 delete ing.name
                 delete ing.hasChanged
             })
-            console.log(updatedIngredients)
             const promises = updatedIngredients.map(ing => {
                 return(SpiritedApiService.patchCocktailIngredient(ing, ing.ciID))
             })
-            Promise.all(promises).then(res => {
-                this.props.history.push(`/cocktails/${cocktailId}`)
+            Promise.all(promises)
+                .then(res => {
+                    this.props.history.push(`/cocktails/${cocktailId}`)
+                .catch(res => {
+                    this.setState({ error: res.error })
+                })
             })
         }
     }
@@ -485,11 +493,15 @@ export default class UpdateCocktailForm extends Component {
 
     render() {
         const { cocktailName, description, createdBy, instructions, garnish, glass, notes, ingredientInstructions } = this.state
-        let count = this.state.count;
+        let count = this.state.count
         let currentIngredients = this.RenderIngredientsRows()
-        let ingredients = this.RenderNewIngredientsRows(count);
+        let ingredients = this.RenderNewIngredientsRows(count)
+        const { error } = this.state
         return (
             <form className='update-cocktail' onSubmit={e => this.handleSubmit(e)}>
+                <div role='alert'>
+                    {error && <div className='error'>{error}</div>}
+                </div>
                 <h2>Update Cocktail Recipe</h2>
                 <div className='form-group'>
                     <label htmlFor='name'>Name</label>

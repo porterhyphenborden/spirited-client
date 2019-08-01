@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import SpiritedContext from '../../SpiritedContext';
 import ValidationError from '../ValidationError';
 import IngredientRow from '../IngredientRow/IngredientRow';
 import SpiritedApiService from '../../services/spirited-api-service';
@@ -9,6 +8,7 @@ export default class AddCocktailForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            error: null,
             count: 1,
             cocktailName: '',
             description: '',
@@ -48,8 +48,6 @@ export default class AddCocktailForm extends Component {
         units: [],
         ingredients: [],
     }
-
-    static contextType = SpiritedContext;
 
     updateCocktailName(cocktailName) {
         this.setState({cocktailName}, () => {this.validateName(cocktailName)});
@@ -113,7 +111,7 @@ export default class AddCocktailForm extends Component {
         
         fieldValue = fieldValue.trim();
         if(fieldValue.length === 0) {
-            fieldErrors.name = 'Name is required.';
+            fieldErrors.cocktailName = 'Name is required.';
             hasError = true;
         } 
         else {
@@ -293,6 +291,12 @@ export default class AddCocktailForm extends Component {
                 Promise.all(promises).then(res => {
                     this.props.history.push(`/cocktails/${res[0].cocktail_id}`)
                 })
+                .catch(res => {
+                    this.setState({ error: res.error })
+                })
+            })
+            .catch(res => {
+                this.setState({ error: res.error })
             })
     }
 
@@ -355,19 +359,24 @@ export default class AddCocktailForm extends Component {
     };
 
     render() {
-        let count = this.state.count;
-        let ingredients = this.RenderIngredientsRows(count);
+        let count = this.state.count
+        let ingredients = this.RenderIngredientsRows(count)
+        const { error } = this.state
         return (
             <form className='add-cocktail' onSubmit={e => this.handleSubmit(e)}>
+                <div role='alert'>
+                    {error && <div className='error'>{error}</div>}
+                </div>
                 <h2>Add a new cocktail</h2>
+                <p>* Indicates a required field.</p>
                 <div className='form-group'>
-                    <label htmlFor='name'>Name</label>
-                    <input name='name' id='name' type='text' onChange={e => this.updateCocktailName(e.target.value)} />
+                    <label htmlFor='name'>Name *</label>
+                    <input name='name' id='name' type='text' required onChange={e => this.updateCocktailName(e.target.value)} />
                     <ValidationError hasError={!this.state.cocktailNameValid} message={this.state.validationMessages.cocktailName}/>
                 </div>
                 <div className='form-group'>
-                    <label htmlFor='description'>Description</label>
-                    <input name='description' id='description' type='text' onChange={e => this.updateDescription(e.target.value)} />
+                    <label htmlFor='description'>Description *</label>
+                    <input name='description' id='description' type='text' required onChange={e => this.updateDescription(e.target.value)} />
                     <ValidationError hasError={!this.state.descriptionValid} message={this.state.validationMessages.description}/>
                 </div>
                 <div className='form-group'>
@@ -380,8 +389,8 @@ export default class AddCocktailForm extends Component {
                 <ValidationError hasError={!this.state.ingredientNameValid} message={this.state.validationMessages.ingredientName}/>
                 <button className='add-row' onClick={e => this.AddIngredientsRow(e)}>+</button>
                 <div className='form-group'>
-                    <label htmlFor='instructions'>Instructions</label>
-                    <textarea name='instructions' id='instructions' onChange={e => this.updateInstructions(e.target.value)} />
+                    <label htmlFor='instructions'>Instructions *</label>
+                    <textarea name='instructions' id='instructions' required onChange={e => this.updateInstructions(e.target.value)} />
                     <ValidationError hasError={!this.state.instructionsValid} message={this.state.validationMessages.instructions}/>
                 </div>
                 <div className='form-group'>

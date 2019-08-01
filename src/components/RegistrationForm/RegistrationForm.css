@@ -14,3 +14,7 @@ form.registration-form label, form.registration-form input {
     margin: 10px auto;
     font-size: 18px;
 }
+
+label.password-label {
+    font-size: 14px;
+}

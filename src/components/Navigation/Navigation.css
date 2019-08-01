@@ -1,7 +1,6 @@
 nav.main-nav {
     display: flex;
     flex-direction: column;
-
 }
 
 nav.main-nav a:link {
@@ -9,7 +8,7 @@ nav.main-nav a:link {
     border-radius: 2px;
     padding: 2px 5px;
     text-align: center;
-    margin-top: 5px;
+    margin: 5px;
     height: 100%;
 }
 
@@ -17,7 +16,7 @@ nav.main-nav a:link {
     nav.main-nav {
         flex-direction: row;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
     }
 
     nav.main-nav a:link {

@@ -56,6 +56,7 @@ export default class RegistrationForm extends Component {
                 </div>
                 <div className='form-group'>
                     <label htmlFor='password'>Password</label>
+                    <label htmlFor='password' className='password-label'>Must be at least 8 characters, contain 1 uppercase, 1 number, and 1 special character.</label>
                     <input type='password' name='password' id='password' onChange={e => this.updatePassword(e.target.value)}  />
                 </div>
                 <button type='submit'>Register</button>

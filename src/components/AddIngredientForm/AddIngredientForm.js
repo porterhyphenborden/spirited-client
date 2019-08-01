@@ -8,6 +8,7 @@ export default class AddIngredientForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            error: null,
             ingredient: '',
             ingredientValid: false,
             formValid: false,
@@ -52,13 +53,13 @@ export default class AddIngredientForm extends Component {
         this.setState({
             validationMessage: fieldError,
             ingredientValid: !hasError
-        }, this.formValid );
+        }, this.formValid )
     }
 
     formValid() {
         this.setState({
             formValid: this.state.ingredientValid,
-        });
+        })
     }
 
     handleSubmit(event) {
@@ -67,15 +68,19 @@ export default class AddIngredientForm extends Component {
         SpiritedApiService.postIngredient(ingredient)
             .then(res => {
                 this.props.onAddIngredient(res)})
-            .catch(error => {
-                console.error({ error })
+            .catch(res => {
+                this.setState({ error: res.error })
             })
     }
 
     render() {
-        const ingredients = this.props.ingredients;
+        const ingredients = this.props.ingredients
+        const { error } = this.state
         return (
             <form className='add-ingredient' onSubmit={e => this.handleSubmit(e)}>
+                <div role='alert'>
+                    {error && <div className='error'>{error}</div>}
+                </div>
                 <h2>Add a new ingredient</h2>
                 <div className='form-group'>
                     <label htmlFor='name'>Name</label>

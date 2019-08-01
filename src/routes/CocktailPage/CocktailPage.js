@@ -5,6 +5,14 @@ import SpiritedContext from '../../SpiritedContext'
 import './CocktailPage.css'
 
 export default class CocktailPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            cocktail: {},
+            ingredients: [],
+        }
+    }
+
     static defaultProps = {
         match: { params: {} },
     }
@@ -15,14 +23,14 @@ export default class CocktailPage extends Component {
         const { cocktailId } = this.props.match.params;
         SpiritedApiService.getCocktail(cocktailId)
             .then((cocktail) => {
-                this.context.setCurrentCocktail(cocktail)
+                this.setState({cocktail})
             })
             .catch(error => {
                 console.error({ error })
             })
         SpiritedApiService.getIndredientsForCocktail(cocktailId)
             .then((ingredients) => {
-                this.context.setCurrentCocktailIng(ingredients)
+                this.setState({ingredients})
             })
             .catch(error => {
                 console.error({ error })
@@ -30,8 +38,8 @@ export default class CocktailPage extends Component {
     }
 
     render() {
-        const cocktail = this.context.currentCocktail;
-        const ingredients = this.context.cocktailIngredients;
+        const cocktail = this.state.cocktail;
+        const ingredients = this.state.ingredients;
         return (
             <div className='cocktail-recipe'>
                 <h3>{cocktail.name}</h3>
@@ -54,7 +62,7 @@ export default class CocktailPage extends Component {
                     <p>Notes: {cocktail.notes}</p>}
                 {cocktail.ing_instructions &&
                     <p>Ingredient Instructions: {cocktail.ing_instructions}</p>}
-                {cocktail.user_id && <Link to={`/my-cocktails/${cocktail.id}/update`}>
+                {cocktail.user_id && <Link className='update-button' to={`/my-cocktails/${cocktail.id}/update`}>
                     Update Cocktail
                 </Link>}
             </div>

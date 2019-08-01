@@ -25,3 +25,13 @@ form.add-cocktail button.add-row {
     width: 22px;
     height: 22px;
 }
+
+form .add-cocktail p {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+}
+
+form .add-cocktail h2 {
+    margin-bottom: 5px;
+}
