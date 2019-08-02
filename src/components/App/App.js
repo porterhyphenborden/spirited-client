@@ -13,6 +13,7 @@ import LoginPage from '../../routes/LoginPage/LoginPage'
 import UserLandingPage from '../../routes/UserLandingPage/UserLandingPage'
 import UpdateCocktailPage from '../../routes/UpdateCocktailPage/UpdateCocktailPage'
 import NotFoundPage from '../../routes/NotFoundPage/NotFoundPage'
+import CollectionPage from '../../routes/CollectionPage/CollectionPage'
 import './App.css'
 
 class App extends Component {
@@ -47,6 +48,10 @@ class App extends Component {
             <Route 
               exact path='/cocktails/:cocktailId'
               component={CocktailPage}
+            />
+            <Route 
+              exact path='/collections/:collectionId'
+              component={CollectionPage}
             />
             <PrivateRoute 
               exact path='/my-cocktails/:cocktailId'

@@ -1,0 +1,23 @@
+ul.collections {
+    list-style: none;
+    padding: 0;
+    margin: 0 20px;
+}
+
+div.collections {
+    margin-bottom: 20px;
+}
+
+p.collection-desc {
+    margin: 0;
+    padding: 0;
+}
+
+ul.collection li {
+    margin: 0;
+}
+
+.collections h3 {
+    margin: 15px 0 5px 0;
+    font-size: 18px;
+}

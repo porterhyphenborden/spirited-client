@@ -2,4 +2,15 @@ a:link.update-button {
     border: 1px solid rgb(0, 45, 63);
     border-radius: 4px;
     padding: 2px 5px;
+    margin: 5px;
+    font-size: 16px;
+}
+
+button.delete-button {
+    border: 1px solid rgb(0, 45, 63);
+    border-radius: 4px;
+    padding: 2px 5px;
+    background-color: white;
+    font-size: 16px;
+    margin: 5px;
 }

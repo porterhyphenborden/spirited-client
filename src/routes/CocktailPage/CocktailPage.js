@@ -8,6 +8,7 @@ export default class CocktailPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            error: null,
             cocktail: {},
             ingredients: [],
         }
@@ -15,6 +16,9 @@ export default class CocktailPage extends Component {
 
     static defaultProps = {
         match: { params: {} },
+        history: {
+            push: () => { }
+        },
     }
 
     static contextType = SpiritedContext
@@ -25,23 +29,38 @@ export default class CocktailPage extends Component {
             .then((cocktail) => {
                 this.setState({cocktail})
             })
-            .catch(error => {
-                console.error({ error })
+            .catch(res => {
+                this.setState({ error: res.error })
             })
         SpiritedApiService.getIndredientsForCocktail(cocktailId)
             .then((ingredients) => {
                 this.setState({ingredients})
             })
-            .catch(error => {
-                console.error({ error })
+            .catch(res => {
+                this.setState({ error: res.error })
+            })
+    }
+
+    handleDeleteCocktail(event, id) {
+        event.preventDefault()
+        SpiritedApiService.deleteCocktail(id)
+            .then((res) => {
+                this.props.history.push(`/my-cocktails/`)
+            })
+            .catch(res => {
+                this.setState({ error: res.error })
             })
     }
 
     render() {
-        const cocktail = this.state.cocktail;
-        const ingredients = this.state.ingredients;
+        const cocktail = this.state.cocktail
+        const ingredients = this.state.ingredients
+        const { error } = this.state
         return (
             <div className='cocktail-recipe'>
+                <div role='alert'>
+                    {error && <div className='error'>{error}</div>}
+                </div>
                 <h3>{cocktail.name}</h3>
                 <p>{cocktail.description}</p>
                 {cocktail.created_by && 
@@ -65,6 +84,9 @@ export default class CocktailPage extends Component {
                 {cocktail.user_id && <Link className='update-button' to={`/my-cocktails/${cocktail.id}/update`}>
                     Update Cocktail
                 </Link>}
+                {cocktail.user_id && <button className='delete-button' onClick={(e) => this.handleDeleteCocktail(e, cocktail.id)}>
+                    Delete Cocktail
+                </button>}
             </div>
         )
     }

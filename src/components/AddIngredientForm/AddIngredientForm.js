@@ -64,10 +64,14 @@ export default class AddIngredientForm extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const ingredient = this.state.ingredient;
+        const ingredient = this.state.ingredient
+        const { name } = event.target
         SpiritedApiService.postIngredient(ingredient)
             .then(res => {
-                this.props.onAddIngredient(res)})
+                this.props.onAddIngredient(res)
+                this.setState({ ingredient: '' })
+                name.value = ''
+            })
             .catch(res => {
                 this.setState({ error: res.error })
             })

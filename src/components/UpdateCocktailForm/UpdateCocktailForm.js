@@ -361,10 +361,10 @@ export default class UpdateCocktailForm extends Component {
                 Promise.all(promises)
                     .then(res => {
                         this.props.history.push(`/cocktails/${cocktailId}`)
-                    .catch(res => {
+                    })
+                        .catch(res => {
                         this.setState({ error: res.error })
                     })
-                })
             }
         if (this.state.ingredientsHaveChanged) {
             const ingredients = this.state.currentIngredients
@@ -389,10 +389,10 @@ export default class UpdateCocktailForm extends Component {
             Promise.all(promises)
                 .then(res => {
                     this.props.history.push(`/cocktails/${cocktailId}`)
+                })
                 .catch(res => {
                     this.setState({ error: res.error })
                 })
-            })
         }
     }
 
@@ -401,7 +401,7 @@ export default class UpdateCocktailForm extends Component {
         SpiritedApiService.deleteCocktailIngredient(ciID)
         const currentIngredients = [...this.state.currentIngredients]
         currentIngredients.splice(key, 1)
-        this.setState({ currentIngredients })
+        this.setState({ currentIngredients , cocktailHasChanged: true}, this.formValid)
     }
 
     RenderIngredientsRows() {
@@ -422,6 +422,7 @@ export default class UpdateCocktailForm extends Component {
                         onUpdateUnit={this.updateCurrentIngredientUnit}
                         onUpdateName={this.updateCurrentIngredientName}
                         onDeleteRow={this.onDeleteRow}
+                        readOnly={'readonly'}
                     />
                 )}
             </>

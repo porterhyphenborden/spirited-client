@@ -4,11 +4,12 @@ ul.cocktail-results {
     margin: 0;
 }
 
-ul.cocktail-results li p{
+ul.cocktail-results li p {
     margin: 0;
     padding: 0;
 }
 
 h3 {
     margin: 15px 0 5px 0;
+    font-size: 18px;
 }

@@ -284,7 +284,6 @@ export default class AddCocktailForm extends Component {
                     delete ing.ingredientUnit;
                     ing.cocktail_id = cocktail_id;
                 })
-                console.log(newIngredients)
                 const promises = newIngredients.map(ing => {
                     return(SpiritedApiService.postCocktailIngredient(ing))
                 })

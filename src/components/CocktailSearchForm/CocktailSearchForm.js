@@ -88,7 +88,6 @@ export default class CocktailSearchForm extends Component {
         const searchTerm = this.state.searchTerm;
         SpiritedApiService.getCocktails(searchKey, searchTerm)
             .then((cocktails) => {
-                console.log(cocktails)
                 if (cocktails.length === 0) {
                     this.setState({ error: 'Your search returned no results.' })
                 }
@@ -103,7 +102,7 @@ export default class CocktailSearchForm extends Component {
         const { error } = this.state
         return (
             <form className='cocktail-search' onSubmit={e => this.handleSubmit(e)}>
-                <h2>Search for cocktails</h2>
+                <h2>Or search for cocktails</h2>
                 <div className='form-group'>
                     <label htmlFor='search-by'>Search by:</label>
                     <select id='search-by' name='search-by' onChange={e => this.updateSearchKey(e.target.value)}>

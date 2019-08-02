@@ -182,6 +182,54 @@ const SpiritedApiService = {
                     : res.text()
             )
     },
+    deleteCocktail(id) {
+        return fetch(`${config.API_ENDPOINT}/cocktails/${id}`, {
+            method: 'DELETE',
+            headers: {
+            },
+        })
+            .then(res =>
+                (!res.ok)
+                    ? res.text().then(e => Promise.reject(e))
+                    : res.text()
+            )
+    },
+    getCocktailCollections() {
+        return fetch(`${config.API_ENDPOINT}/collections`, {
+            method: 'GET',
+            headers: {
+            },
+        })
+            .then(res =>
+                (!res.ok)
+                    ? res.json().then(e => Promise.reject(e))
+                    : res.json()
+            )
+    },
+    getCocktailsForCollection(id) {
+        return fetch(`${config.API_ENDPOINT}/collections/${id}/cocktails`, {
+            method: 'GET',
+            headers: {
+            },
+        })
+            .then(res =>
+                (!res.ok)
+                    ? res.json().then(e => Promise.reject(e))
+                    : res.json()
+            )
+    },
+    getCollectionById(id) {
+        return fetch(`${config.API_ENDPOINT}/collections/${id}`, {
+            method: 'GET',
+            headers: {
+            },
+        })
+            .then(res =>
+                (!res.ok)
+                    ? res.json().then(e => Promise.reject(e))
+                    : res.json()
+            )
+    },
 }
 
 export default SpiritedApiService;
