@@ -307,7 +307,7 @@ export default class UpdateCocktailForm extends Component {
         this.setState({
           formValid: this.state.cocktailNameValid && this.state.descriptionValid && this.state.instructionsValid
             && this.state.quantityValid && this.state.ingredientUnitValid && this.state.ingredientNameValid
-        });
+        })
     }
 
     handleSubmit(event) {
@@ -323,8 +323,8 @@ export default class UpdateCocktailForm extends Component {
             ing_instructions: this.state.ingredientInstructions,
         }
         const cocktailId = this.state.cocktailId
-        const ingredientsList = this.props.ingredients;
-        const unitsList = this.props.units;
+        const ingredientsList = this.props.ingredients
+        const unitsList = this.props.units
         if (this.state.cocktailHasChanged) {
             SpiritedApiService.patchCocktail(cocktail, cocktailId)
                 .then(res => {

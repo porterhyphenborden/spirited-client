@@ -90,9 +90,11 @@ export default class AddIngredientForm extends Component {
                     <label htmlFor='name'>Name</label>
                     <input name='name' id='name' type='text' list='ingredients' onChange={e => this.updateIngredient(e.target.value)}/>
                     <datalist id='ingredients'>
-                        {ingredients.map(ingredient => 
-                            <option value={ingredient.name} key={ingredient.id} />
-                        )}
+                        <select>
+                            {ingredients.map(ingredient => 
+                                <option value={ingredient.name} key={ingredient.id}>{ingredient.name}</option>
+                            )}
+                        </select>
                     </datalist>
                     <ValidationError hasError={!this.state.ingredientValid} message={this.state.validationMessage}/>
                 </div>
