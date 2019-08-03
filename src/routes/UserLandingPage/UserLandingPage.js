@@ -23,6 +23,7 @@ export default class UserLandingPage extends Component {
         return (
             <div className='user-cocktails'>
                 <h2>My Cocktails</h2>
+                {cocktails.length === 0 && <p>Add a new cocktail to your library by using the link above!</p>}
                 <CocktailList 
                     cocktails={cocktails}
                 />

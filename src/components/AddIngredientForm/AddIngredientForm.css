@@ -9,6 +9,7 @@ form.add-ingredient div.form-group {
 
 form.add-ingredient input {
     margin-bottom: 5px;
+    font-size: 16px;
 }
 
 form.add-ingredient button.add-ingredient {

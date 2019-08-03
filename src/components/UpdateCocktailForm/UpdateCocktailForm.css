@@ -2,13 +2,14 @@ form.update-cocktail {
     font-size: 16px;
 }
 
+form.update-cocktail input, form.update-cocktail textarea {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
 form.update-cocktail div.form-group {
     display: flex;
     flex-direction: column;
-}
-
-form.update-cocktail input, form.update-cocktail textarea {
-    margin-bottom: 5px;
 }
 
 form.update-cocktail button.update-cocktail {
@@ -24,4 +25,9 @@ form.update-cocktail button.add-row {
     padding: 0;
     width: 22px;
     height: 22px;
+}
+
+.ingredient-info {
+    font-size: 15px;
+    margin-bottom: 5px;
 }

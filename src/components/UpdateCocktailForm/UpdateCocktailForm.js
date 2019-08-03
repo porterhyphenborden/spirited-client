@@ -523,6 +523,7 @@ export default class UpdateCocktailForm extends Component {
                 <ValidationError hasError={!this.state.quantityValid} message={this.state.validationMessages.quantity}/>
                 <ValidationError hasError={!this.state.ingredientUnitValid} message={this.state.validationMessages.ingredientUnit}/>
                 <ValidationError hasError={!this.state.ingredientNameValid} message={this.state.validationMessages.ingredientName}/>
+                <div className='ingredient-info' id='ingredient-info'>If you need to update an ingredient's name, please delete and re-add.</div>
                 <button className='add-row' onClick={e => this.AddIngredientsRow(e)}>+</button>
                 <div className='form-group'>
                     <label htmlFor='instructions'>Instructions</label>

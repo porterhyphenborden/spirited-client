@@ -19,22 +19,18 @@ export default class IngredientRow extends Component  {
                     <label htmlFor='unit'>Unit</label>
                     <input name='unit' className='unit' id={'unit' + this.props.id} list='units' value={this.props.unitValue} onChange={(e) => this.props.onUpdateUnit(this.props.id, e.target.value)} />
                     <datalist id='units'>
-                        <select>
-                            {units.map(unit => 
-                                <option value={unit.unit_name} key={unit.id}>{unit.unit_name}</option>
-                            )}
-                        </select>
+                        {units.map(unit => 
+                            <option value={unit.unit_name} key={unit.id}>{unit.unit_name}</option>
+                        )}
                     </datalist>
                 </div>
                 <div className='ingredient-form-group ingredient'>
                     <label htmlFor='ingredient'>Ingredient</label>
-                    <input name='ingredient' className='ingredient' id={'ingredient' + this.props.id} list='ingredients' readOnly={this.props.readOnly ? true : false} value={this.props.nameValue} onChange={(e) => this.props.onUpdateName(this.props.id, e.target.value)} />
+                    <input name='ingredient' className='ingredient' aria-describedby="ingredient-info" id={'ingredient' + this.props.id} list='ingredients' readOnly={this.props.readOnly ? true : false} value={this.props.nameValue} onChange={(e) => this.props.onUpdateName(this.props.id, e.target.value)} />
                     <datalist id='ingredients'>
-                        <select>
-                            {ingredients.map(ingredient => 
-                                <option value={ingredient.name} key={ingredient.id}>{ingredient.name}</option>
-                            )}
-                        </select>
+                        {ingredients.map(ingredient => 
+                            <option value={ingredient.name} key={ingredient.id}>{ingredient.name}</option>
+                        )}
                     </datalist>
                 </div>
                 {this.props.onDeleteRow && <button className='delete-row' onClick={(e) => this.props.onDeleteRow(this.props.ciID, this.props.id, e)}>-</button>}

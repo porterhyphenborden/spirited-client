@@ -9,6 +9,7 @@ form.add-cocktail div.form-group {
 
 form.add-cocktail input, form.add-cocktail textarea {
     margin-bottom: 5px;
+    font-size: 16px;
 }
 
 form.add-cocktail button.add-cocktail {
