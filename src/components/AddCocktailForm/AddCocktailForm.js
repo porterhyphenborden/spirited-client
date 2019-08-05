@@ -265,6 +265,7 @@ export default class AddCocktailForm extends Component {
                 let newIngredients = this.state.ingredients
                 let ingredientsList = this.props.ingredients
                 let unitsList = this.props.units
+                //Find id of ingredient and add to object
                 newIngredients.forEach(ing => {
                     ingredientsList.forEach(listIng => {
                         if (ing.ingredientName === listIng.name) {
@@ -272,6 +273,7 @@ export default class AddCocktailForm extends Component {
                         }
                     })
                 })
+                //Find id of unit and add to object
                 newIngredients.forEach(ing => {
                     unitsList.forEach(listUnit => {
                         if (ing.ingredientUnit === listUnit.unit_name) {
@@ -279,6 +281,7 @@ export default class AddCocktailForm extends Component {
                         }
                     })
                 })
+                //Get rid of irrelevant fields and set cocktail id
                 newIngredients.forEach(ing => {
                     delete ing.ingredientName
                     delete ing.ingredientUnit

@@ -325,6 +325,7 @@ export default class UpdateCocktailForm extends Component {
         const cocktailId = this.state.cocktailId
         const ingredientsList = this.props.ingredients
         const unitsList = this.props.units
+        //Check for updates to cocktail fields, if so, PATCH
         if (this.state.cocktailHasChanged) {
             SpiritedApiService.patchCocktail(cocktail, cocktailId)
                 .then(res => {
@@ -334,6 +335,7 @@ export default class UpdateCocktailForm extends Component {
                     this.setState({ error: res.error })
                 })
         }
+        //Check whether new ingredients have been added, if so, POST
         if (this.state.newIngredients[0].ingredientName) {
                 const newIngredients = this.state.newIngredients
                 newIngredients.forEach(ing => {
@@ -366,6 +368,7 @@ export default class UpdateCocktailForm extends Component {
                         this.setState({ error: res.error })
                     })
             }
+        //Check whether any ingredients have been updated, if so, PATCH
         if (this.state.ingredientsHaveChanged) {
             const ingredients = this.state.currentIngredients
             const updatedIngredients = []
@@ -396,6 +399,7 @@ export default class UpdateCocktailForm extends Component {
         }
     }
 
+    //If ingredient row has been deleted, DELETE, and delete from DOM
     onDeleteRow = (ciID, key, event) => {
         event.preventDefault()
         SpiritedApiService.deleteCocktailIngredient(ciID)
