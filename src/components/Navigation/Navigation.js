@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import SpiritedContext from '../../SpiritedContext'
 import './Navigation.css'
 
 export default class Navigation extends Component {
 
-    static contextType = SpiritedContext;
+    static contextType = SpiritedContext
 
     renderNavLoggedIn() {
         return (

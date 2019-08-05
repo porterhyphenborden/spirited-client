@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import ValidationError from '../ValidationError';
-import IngredientRow from '../IngredientRow/IngredientRow';
-import SpiritedApiService from '../../services/spirited-api-service';
+import React, { Component } from 'react'
+import ValidationError from '../ValidationError'
+import IngredientRow from '../IngredientRow/IngredientRow'
+import SpiritedApiService from '../../services/spirited-api-service'
 import './AddCocktailForm.css'
 
 export default class AddCocktailForm extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             error: null,
             count: 1,
@@ -50,205 +50,205 @@ export default class AddCocktailForm extends Component {
     }
 
     updateCocktailName(cocktailName) {
-        this.setState({cocktailName}, () => {this.validateName(cocktailName)});
+        this.setState({cocktailName}, () => {this.validateName(cocktailName)})
     }
 
     updateDescription(description) {
-        this.setState({description}, () => {this.validateDescription(description)});
+        this.setState({description}, () => {this.validateDescription(description)})
     }
 
     updateCreatedBy(createdBy) {
-        this.setState({createdBy});
+        this.setState({createdBy})
     }
 
     updateQuantity = (id, quantity) => {
-        let ingredients = [...this.state.ingredients];
-        let ingredient = {...ingredients[id]};
-        ingredient.quantity = quantity;
-        ingredients[id] = ingredient;
+        let ingredients = [...this.state.ingredients]
+        let ingredient = {...ingredients[id]}
+        ingredient.quantity = quantity
+        ingredients[id] = ingredient
         this.setState({ingredients}, () => {this.validateQuantity(quantity)})
     }
 
     updateIngredientUnit = (id, ingredientUnit) => {
-        let ingredients = [...this.state.ingredients];
-        let ingredient = {...ingredients[id]};
-        ingredient.ingredientUnit = ingredientUnit;
-        ingredients[id] = ingredient;
+        let ingredients = [...this.state.ingredients]
+        let ingredient = {...ingredients[id]}
+        ingredient.ingredientUnit = ingredientUnit
+        ingredients[id] = ingredient
         this.setState({ingredients}, () => {this.validateIngredientUnit(ingredientUnit)})
     }
 
     updateIngredientName = (id, ingredientName) => {
-        let ingredients = [...this.state.ingredients];
-        let ingredient = {...ingredients[id]};
-        ingredient.ingredientName = ingredientName;
-        ingredients[id] = ingredient;
+        let ingredients = [...this.state.ingredients]
+        let ingredient = {...ingredients[id]}
+        ingredient.ingredientName = ingredientName
+        ingredients[id] = ingredient
         this.setState({ingredients}, () => {this.validateIngredientName(ingredientName)})
     }
 
     updateInstructions(instructions) {
-        this.setState({instructions}, () => {this.validateInstructions(instructions)});
+        this.setState({instructions}, () => {this.validateInstructions(instructions)})
     }
 
     updateGarnish(garnish) {
-        this.setState({garnish});
+        this.setState({garnish})
     }
 
     updateGlass(glass) {
-        this.setState({glass});
+        this.setState({glass})
     }
 
     updateNotes(notes) {
-        this.setState({notes});
+        this.setState({notes})
     }
 
     updateIngInstructions(ingredientInstructions) {
-        this.setState({ingredientInstructions});
+        this.setState({ingredientInstructions})
     }
 
     validateName(fieldValue) {
-        const fieldErrors = {...this.state.validationMessages};
-        let hasError = false;
+        const fieldErrors = {...this.state.validationMessages}
+        let hasError = false
         
-        fieldValue = fieldValue.trim();
+        fieldValue = fieldValue.trim()
         if(fieldValue.length === 0) {
-            fieldErrors.cocktailName = 'Name is required.';
-            hasError = true;
+            fieldErrors.cocktailName = 'Name is required.'
+            hasError = true
         } 
         else {
-            fieldErrors.name = '';
-            hasError = false;
+            fieldErrors.name = ''
+            hasError = false
         }
     
         this.setState({
             validationMessages: fieldErrors,
             cocktailNameValid: !hasError
-        }, this.formValid );
+        }, this.formValid )
     }
 
     validateDescription(fieldValue) {
-        const fieldErrors = {...this.state.validationMessages};
-        let hasError = false;
+        const fieldErrors = {...this.state.validationMessages}
+        let hasError = false
         
-        fieldValue = fieldValue.trim();
+        fieldValue = fieldValue.trim()
         if(fieldValue.length === 0) {
-            fieldErrors.description = 'Description is required.';
-            hasError = true;
+            fieldErrors.description = 'Description is required.'
+            hasError = true
         } 
         else {
-            fieldErrors.description = '';
-            hasError = false;
+            fieldErrors.description = ''
+            hasError = false
         }
     
         this.setState({
             validationMessages: fieldErrors,
             descriptionValid: !hasError
-        }, this.formValid );
+        }, this.formValid )
     }
 
     validateInstructions(fieldValue) {
-        const fieldErrors = {...this.state.validationMessages};
-        let hasError = false;
+        const fieldErrors = {...this.state.validationMessages}
+        let hasError = false
         
-        fieldValue = fieldValue.trim();
+        fieldValue = fieldValue.trim()
         if(fieldValue.length === 0) {
-            fieldErrors.instructions = 'Instructions required.';
-            hasError = true;
+            fieldErrors.instructions = 'Instructions required.'
+            hasError = true
         } 
         else {
-            fieldErrors.instructions = '';
-            hasError = false;
+            fieldErrors.instructions = ''
+            hasError = false
         }
     
         this.setState({
             validationMessages: fieldErrors,
             instructionsValid: !hasError
-        }, this.formValid );
+        }, this.formValid )
     }
 
     validateQuantity(fieldValue) {
-        const fieldErrors = {...this.state.validationMessages};
-        let hasError = false;
+        const fieldErrors = {...this.state.validationMessages}
+        let hasError = false
         
-        fieldValue = fieldValue.trim();
+        fieldValue = fieldValue.trim()
         if(fieldValue.length === 0) {
-            fieldErrors.quantity = 'Ingredient amount is required.';
-            hasError = true;
+            fieldErrors.quantity = 'Ingredient amount is required.'
+            hasError = true
         } 
         else {
-            fieldErrors.quantity = '';
-            hasError = false;
+            fieldErrors.quantity = ''
+            hasError = false
         }
     
         this.setState({
             validationMessages: fieldErrors,
             quantityValid: !hasError
-        }, this.formValid );
+        }, this.formValid )
     }
     
 
     validateIngredientUnit(fieldValue) {
-        const fieldErrors = {...this.state.validationMessages};
-        const unitsList = this.props.units;
-        const unitsListLower = unitsList.map(unit => unit.unit_name.toLowerCase());
-        let hasError = false;
-        fieldValue = fieldValue.trim().toLowerCase();
-        const found = unitsListLower.some(unit => unit === fieldValue);
+        const fieldErrors = {...this.state.validationMessages}
+        const unitsList = this.props.units
+        const unitsListLower = unitsList.map(unit => unit.unit_name.toLowerCase())
+        let hasError = false
+        fieldValue = fieldValue.trim().toLowerCase()
+        const found = unitsListLower.some(unit => unit === fieldValue)
         
         if (fieldValue.length === 0) {
-            fieldErrors.ingredientUnit = 'Unit is required.';
-            hasError = true;
+            fieldErrors.ingredientUnit = 'Unit is required.'
+            hasError = true
         } else {
             if (!found) {
-                fieldErrors.ingredientUnit = 'That unit does not exist. Please use another.';
-                hasError = true;
+                fieldErrors.ingredientUnit = 'That unit does not exist. Please use another.'
+                hasError = true
             } else {
-                fieldErrors.ingredientUnit = '';
-                hasError = false;
+                fieldErrors.ingredientUnit = ''
+                hasError = false
             }
         }
     
         this.setState({
             validationMessages: fieldErrors,
             ingredientUnitValid: !hasError
-        }, this.formValid );
+        }, this.formValid )
     }
 
     validateIngredientName(fieldValue) {
-        const fieldErrors = {...this.state.validationMessages};
-        const ingredientsList = this.props.ingredients;
-        const ingredientsListLower = ingredientsList.map(ing => ing.name.toLowerCase());
-        let hasError = false;
-        fieldValue = fieldValue.trim().toLowerCase();
-        const found = ingredientsListLower.some(ing => ing === fieldValue);
+        const fieldErrors = {...this.state.validationMessages}
+        const ingredientsList = this.props.ingredients
+        const ingredientsListLower = ingredientsList.map(ing => ing.name.toLowerCase())
+        let hasError = false
+        fieldValue = fieldValue.trim().toLowerCase()
+        const found = ingredientsListLower.some(ing => ing === fieldValue)
         
         if (fieldValue.length === 0) {
-            fieldErrors.ingredientName = 'Ingredient name is required.';
-            hasError = true;
+            fieldErrors.ingredientName = 'Ingredient name is required.'
+            hasError = true
         } else {
             if (!found) {
-                fieldErrors.ingredientName = 'That ingredient does not exist. Please use form below to add ingredient.';
-                hasError = true;
+                fieldErrors.ingredientName = 'That ingredient does not exist. Please use form below to add ingredient.'
+                hasError = true
             } else {
-                fieldErrors.ingredientName = '';
-                hasError = false;
+                fieldErrors.ingredientName = ''
+                hasError = false
             }
         }
     
         this.setState({
             validationMessages: fieldErrors,
             ingredientNameValid: !hasError
-        }, this.formValid );
+        }, this.formValid )
     }
 
     formValid() {
         this.setState({
           formValid: this.state.cocktailNameValid && this.state.descriptionValid && this.state.instructionsValid
             && this.state.quantityValid && this.state.ingredientUnitValid && this.state.ingredientNameValid
-        });
+        })
     }
 
     handleSubmit(event) {
-        event.preventDefault();
+        event.preventDefault()
         const cocktail = {
             name: this.state.cocktailName,
             description: this.state.description,
@@ -261,10 +261,10 @@ export default class AddCocktailForm extends Component {
         }
         SpiritedApiService.postcocktail(cocktail)
             .then(res => {
-                let cocktail_id = res.id;
-                let newIngredients = this.state.ingredients;
-                let ingredientsList = this.props.ingredients;
-                let unitsList = this.props.units;
+                let cocktail_id = res.id
+                let newIngredients = this.state.ingredients
+                let ingredientsList = this.props.ingredients
+                let unitsList = this.props.units
                 newIngredients.forEach(ing => {
                     ingredientsList.forEach(listIng => {
                         if (ing.ingredientName === listIng.name) {
@@ -280,9 +280,9 @@ export default class AddCocktailForm extends Component {
                     })
                 })
                 newIngredients.forEach(ing => {
-                    delete ing.ingredientName;
-                    delete ing.ingredientUnit;
-                    ing.cocktail_id = cocktail_id;
+                    delete ing.ingredientName
+                    delete ing.ingredientUnit
+                    ing.cocktail_id = cocktail_id
                 })
                 const promises = newIngredients.map(ing => {
                     return(SpiritedApiService.postCocktailIngredient(ing))
@@ -301,7 +301,7 @@ export default class AddCocktailForm extends Component {
 
 
     RenderIngredientsRows(count) {
-        let rows = [];
+        let rows = []
         for (let i = 0; i < count; i++) {
             rows.push(
                 <IngredientRow 
@@ -322,9 +322,9 @@ export default class AddCocktailForm extends Component {
     }
 
     DeleteNewIngredientsRow = (event, id) => {
-        event.preventDefault();
-        let count = this.state.count;
-        count -= 1;
+        event.preventDefault()
+        let count = this.state.count
+        count -= 1
         if (count >= 1) {
             this.setState(state => {
                 const ingredients = state.ingredients
@@ -332,8 +332,8 @@ export default class AddCocktailForm extends Component {
                 return {
                     ingredients,
                     count: count,
-                };
-            });
+                }
+            })
         }
         else {
             this.setState({ count })
@@ -341,21 +341,21 @@ export default class AddCocktailForm extends Component {
     }
 
     AddIngredientsRow(event) {
-        event.preventDefault();
-        let count = this.state.count;
-        count += 1;
+        event.preventDefault()
+        let count = this.state.count
+        count += 1
         this.setState(state => {
             const ingredients = state.ingredients.concat({
                 quantity: '',
                 ingredientUnit: '',
                 ingredientName: ''
-            });
+            })
             return {
                 ingredients,
                 count: count,
-            };
-        });
-    };
+            }
+        })
+    }
 
     render() {
         let count = this.state.count

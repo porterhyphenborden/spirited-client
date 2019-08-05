@@ -7,7 +7,7 @@ import './SearchPage.css'
 
 export default class SearchPage extends Component {
 
-    static contextType = SpiritedContext;
+    static contextType = SpiritedContext
 
     componentDidMount() {
         this.context.setCocktailList([])

@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import SpiritedApiService from '../../services/spirited-api-service';
-import AddCocktailForm from '../../components/AddCocktailForm/AddCocktailForm';
-import AddIngredientForm from '../../components/AddIngredientForm/AddIngredientForm';
-import SpiritedContext from '../../SpiritedContext';
+import React, { Component } from 'react'
+import SpiritedApiService from '../../services/spirited-api-service'
+import AddCocktailForm from '../../components/AddCocktailForm/AddCocktailForm'
+import AddIngredientForm from '../../components/AddIngredientForm/AddIngredientForm'
+import SpiritedContext from '../../SpiritedContext'
 
 export default class AddCocktailPage extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             units: [],
             ingredients: [],
         }
     }
 
-    static contextType = SpiritedContext;
+    static contextType = SpiritedContext
 
     componentDidMount() {
         SpiritedApiService.getUnits()
@@ -42,7 +42,7 @@ export default class AddCocktailPage extends Component {
     }
 
     render() {
-        const { units, ingredients } = this.state;
+        const { units, ingredients } = this.state
 
         return (
             <>

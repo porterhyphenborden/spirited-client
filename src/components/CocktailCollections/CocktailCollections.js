@@ -6,7 +6,7 @@ import './CocktailCollections.css'
 export default class CocktailCollections extends Component {
 
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             error: null,
             collections: [],

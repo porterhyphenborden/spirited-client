@@ -6,7 +6,7 @@ import './CocktailPage.css'
 
 export default class CocktailPage extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             error: null,
             cocktail: {},
@@ -24,7 +24,7 @@ export default class CocktailPage extends Component {
     static contextType = SpiritedContext
 
     componentDidMount() {
-        const { cocktailId } = this.props.match.params;
+        const { cocktailId } = this.props.match.params
         SpiritedApiService.getCocktail(cocktailId)
             .then((cocktail) => {
                 this.setState({cocktail})

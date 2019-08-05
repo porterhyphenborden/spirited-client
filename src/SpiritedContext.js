@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import TokenService from './services/token-service'
 
 const SpiritedContext = React.createContext({
@@ -10,14 +10,14 @@ const SpiritedContext = React.createContext({
   setIsLoggedIn: () => {},
 })
 
-export default SpiritedContext;
+export default SpiritedContext
 
 export class SpiritedContextProvider extends Component {
   state = {
     cocktails: [],
     userCocktails: [],
     isLoggedIn: TokenService.hasAuthToken(),
-  };
+  }
 
   setCocktailList = cocktails => {
     this.setState({ cocktails })

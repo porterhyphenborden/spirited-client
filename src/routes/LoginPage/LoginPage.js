@@ -10,7 +10,7 @@ export default class LoginPage extends Component {
         },
     }
 
-    static contextType = SpiritedContext;
+    static contextType = SpiritedContext
 
     handleLoginSuccess = () => {
         this.props.history.push('/my-cocktails')

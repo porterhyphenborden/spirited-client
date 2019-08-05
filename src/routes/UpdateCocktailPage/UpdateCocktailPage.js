@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import SpiritedApiService from '../../services/spirited-api-service'
 import SpiritedContext from '../../SpiritedContext'
 import UpdateCocktailForm from '../../components/UpdateCocktailForm/UpdateCocktailForm'
 import AddIngredientForm from '../../components/AddIngredientForm/AddIngredientForm'
-// import { Link } from 'react-router-dom';
 
 export default class UpdateCocktailPage extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             units: [],
             ingredients: [],
@@ -18,7 +17,7 @@ export default class UpdateCocktailPage extends Component {
         match: { params: {} },
     }
 
-    static contextType = SpiritedContext;
+    static contextType = SpiritedContext
 
     componentDidMount() {
         SpiritedApiService.getUnits()
@@ -48,8 +47,8 @@ export default class UpdateCocktailPage extends Component {
 
 
     render() {
-        const { cocktailId } = this.props.match.params;
-        const { units, ingredients } = this.state;
+        const { cocktailId } = this.props.match.params
+        const { units, ingredients } = this.state
         return (
             <div className='update-cocktail'>
                 <UpdateCocktailForm 

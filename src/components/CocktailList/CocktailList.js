@@ -8,10 +8,10 @@ export default class CocktailList extends Component {
         cocktails: [],
     }
 
-    static contextType = SpiritedContext;
+    static contextType = SpiritedContext
 
     render() {
-        const cocktails = this.props.cocktails;
+        const cocktails = this.props.cocktails
         return (
             <ul className='cocktail-results'>
                 {cocktails.map(cocktail =>

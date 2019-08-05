@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import ValidationError from '../ValidationError';
-import SpiritedApiService from '../../services/spirited-api-service';
-import SpiritedContext from '../../SpiritedContext';
+import React, { Component } from 'react'
+import ValidationError from '../ValidationError'
+import SpiritedApiService from '../../services/spirited-api-service'
+import SpiritedContext from '../../SpiritedContext'
 import './AddIngredientForm.css'
 
 export default class AddIngredientForm extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             error: null,
             ingredient: '',
@@ -23,30 +23,30 @@ export default class AddIngredientForm extends Component {
         ingredients: [],
     }
 
-    static contextType = SpiritedContext;
+    static contextType = SpiritedContext
 
     updateIngredient(ingredient) {
-        this.setState({ingredient}, () => {this.validateIngredient(ingredient)});
+        this.setState({ingredient}, () => {this.validateIngredient(ingredient)})
     }
 
     validateIngredient(fieldValue) {
-        let fieldError = this.state.validationMessage;
-        const ingredientsList = this.props.ingredients;
-        const ingredientsListLower = ingredientsList.map(ing => ing.name.toLowerCase());
-        let hasError = false;
-        fieldValue = fieldValue.trim().toLowerCase();
-        const found = ingredientsListLower.some(ing => ing === fieldValue);
+        let fieldError = this.state.validationMessage
+        const ingredientsList = this.props.ingredients
+        const ingredientsListLower = ingredientsList.map(ing => ing.name.toLowerCase())
+        let hasError = false
+        fieldValue = fieldValue.trim().toLowerCase()
+        const found = ingredientsListLower.some(ing => ing === fieldValue)
         
         if (fieldValue.length === 0) {
-            fieldError = 'Ingredient name is required.';
-            hasError = true;
+            fieldError = 'Ingredient name is required.'
+            hasError = true
         } else {
             if (found) {
-                fieldError = 'That ingredient already exists!';
-                hasError = true;
+                fieldError = 'That ingredient already exists!'
+                hasError = true
             } else {
-                fieldError = '';
-                hasError = false;
+                fieldError = ''
+                hasError = false
             }
         }
     
@@ -63,7 +63,7 @@ export default class AddIngredientForm extends Component {
     }
 
     handleSubmit(event) {
-        event.preventDefault();
+        event.preventDefault()
         const ingredient = this.state.ingredient
         const { name } = event.target
         SpiritedApiService.postIngredient(ingredient)

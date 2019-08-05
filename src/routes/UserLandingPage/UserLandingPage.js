@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import SpiritedContext from '../../SpiritedContext';
-import SpiritedApiService from '../../services/spirited-api-service';
+import React, { Component } from 'react'
+import SpiritedContext from '../../SpiritedContext'
+import SpiritedApiService from '../../services/spirited-api-service'
 import CocktailList from '../../components/CocktailList/CocktailList'
 import './UserLandingPage.css'
 import coupe from '../../images/coupepsd.png'

@@ -232,4 +232,4 @@ const SpiritedApiService = {
     },
 }
 
-export default SpiritedApiService;
+export default SpiritedApiService

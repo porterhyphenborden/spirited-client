@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import SpiritedContext from '../../SpiritedContext';
-import SpiritedApiService from '../../services/spirited-api-service';
-import ValidationError from '../ValidationError';
+import React, { Component } from 'react'
+import SpiritedContext from '../../SpiritedContext'
+import SpiritedApiService from '../../services/spirited-api-service'
+import ValidationError from '../ValidationError'
 import './CocktailSearchForm.css'
 
 export default class CocktailSearchForm extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             searchKey: '',
             searchTerm: '',
@@ -21,71 +21,71 @@ export default class CocktailSearchForm extends Component {
         }
     }
 
-    static contextType = SpiritedContext;
+    static contextType = SpiritedContext
 
     componentDidMount() {
         this.setState({ error: null })
     }
 
     updateSearchKey(searchKey) {
-        this.setState({searchKey}, () => {this.validateKey(searchKey)});
+        this.setState({searchKey}, () => {this.validateKey(searchKey)})
     }
 
     updateSearchTerm(searchTerm) {
-        this.setState({searchTerm}, () => {this.validateTerm(searchTerm)});
+        this.setState({searchTerm}, () => {this.validateTerm(searchTerm)})
     }
 
     validateKey(fieldValue) {
-        const fieldErrors = {...this.state.validationMessages};
-        let hasError = false;
+        const fieldErrors = {...this.state.validationMessages}
+        let hasError = false
 
-        fieldValue = fieldValue.trim();
+        fieldValue = fieldValue.trim()
         if (fieldValue.length === 0) {
-            fieldErrors.key = "Search by name or ingredient is required.";
-            hasError = true;
+            fieldErrors.key = 'Search by name or ingredient is required.'
+            hasError = true
         }
         else {
-            fieldErrors.key = '';
-            hasError = false;
+            fieldErrors.key = ''
+            hasError = false
         }
 
         this.setState({
             validationMessages: fieldErrors,
             searchKeyValid: !hasError
-        }, this.formValid );
+        }, this.formValid )
     }
 
     validateTerm(fieldValue) {
-        const fieldErrors = {...this.state.validationMessages};
-        let hasError = false;
+        const fieldErrors = {...this.state.validationMessages}
+        let hasError = false
 
-        fieldValue = fieldValue.trim();
+        fieldValue = fieldValue.trim()
         if (fieldValue.length === 0) {
-            fieldErrors.key = "Search term is required.";
-            hasError = true;
+            fieldErrors.key = 'Search term is required.'
+            hasError = true
         }
         else {
-            fieldErrors.key = '';
-            hasError = false;
+            fieldErrors.key = ''
+            hasError = false
         }
 
         this.setState({
             validationMessages: fieldErrors,
             searchTermValid: !hasError
-        }, this.formValid );
+        }, this.formValid )
     }
 
     formValid() {
         this.setState({
             formValid: this.state.searchKeyValid && this.state.searchTermValid
-        });
+        })
     }
 
     handleSubmit(event) {
-        event.preventDefault();
+        event.preventDefault()
         this.setState({ error: null })
-        const searchKey = this.state.searchKey;
-        const searchTerm = this.state.searchTerm;
+        const searchKey = this.state.searchKey
+        const searchTerm = this.state.searchTerm
         SpiritedApiService.getCocktails(searchKey, searchTerm)
             .then((cocktails) => {
                 if (cocktails.length === 0) {

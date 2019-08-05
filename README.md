@@ -1,68 +1,69 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Spirited
 
-## Available Scripts
+https://spirited-app.porterhyphenborden.now.sh/
 
-In the project directory, you can run:
+## Sumary
 
-### `npm start`
+### Motivation
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+While the craft cocktail movement has taken the art of the cocktail to new levels, cocktail apps have lagged behind. Most are full of outdated recipes from the 70's and don't include the numerous liqueurs that have been created or revitalized by modern distillers. There is also no functional free cocktail recipe API available. Spirited is a tool for cocktail enthusiasts, professional bartenders, and aims to make a free cocktail recipe API available to developers in the future.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+### Concept
 
-### `npm test`
+"Spirited is a tool for the modern bartender and craft cocktail enthusiast. Search our curated selection of cocktail recipes, including both classics and modern favorites. Register for an account to create a personal cocktail library, add your own recipes, and update those recipes as you make changes."
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Description
 
-### `npm run build`
+Spirited provides a free cocktail database of curated selections for users to search by name or ingredient, as well as themed collections of cocktails for users to browse. Registered users have access to their own private cocktail library, and may add and update their own recipes.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Screenshots
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### Cocktail Search Page:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![Cocktail Search Page](https://i.imgur.com/2paBjIv.png)
 
-### `npm run eject`
+### My Cockails Page:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+![My Cockails Page](https://i.imgur.com/xdLJWZH.png)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Add Cocktail Page:
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![Add Cocktail Page](https://i.imgur.com/nNPEx1s.png)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Spirited API
 
-## Learn More
+### Endpoints
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+* /cocktails - GET, POST cocktails
+* /cocktails/id - DELETE, PATCH a cocktail
+* /ingredients - GET, POST ingredients
+* /ingredients/id - DELETE, PATCH an ingredient
+* /cocktails/id/ingredients - GET ingredients for a specific cocktail by id
+* /cocktail-ingredients - GET, POST cocktail ingredients
+* /cocktail-ingredients/id - DELETE, PATCH a cocktail ingredient
+* /collections/ - GET, POST cocktail collections
+* /collections/id - DELETE, PATCH a cocktail collection
+* /collections/id/cocktails - GET cocktails within a collection
+* /units - GET, POST units
+* /units/id - DELETE, PATCH a unit
+* /my-cocktails - GET cocktails by user ID for logged in user
+* /users - GET, POST users
+* /users/id - DELETE, PATCH a user
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Built with
 
-### Code Splitting
+* HTML
+* CSS
+* Javascript
+* NodeJS
+* Express
+* React
+* PostgreSQL
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## Author
 
-### Analyzing the Bundle Size
+Callie Porter-Borden
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
 
-### Making a Progressive Web App
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
 
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

@@ -8,7 +8,7 @@ export default class IngredientRow extends Component  {
     }
 
     render() {
-        const { units, ingredients } = this.props;
+        const { units, ingredients } = this.props
         return (
             <div className='ingredient-row'>
                 <div className='ingredient-form-group amount'>
@@ -26,7 +26,7 @@ export default class IngredientRow extends Component  {
                 </div>
                 <div className='ingredient-form-group ingredient'>
                     <label htmlFor='ingredient'>Ingredient</label>
-                    <input name='ingredient' className='ingredient' aria-describedby="ingredient-info" id={'ingredient' + this.props.id} list='ingredients' readOnly={this.props.readOnly ? true : false} value={this.props.nameValue} onChange={(e) => this.props.onUpdateName(this.props.id, e.target.value)} />
+                    <input name='ingredient' className='ingredient' aria-describedby='ingredient-info' id={'ingredient' + this.props.id} list='ingredients' readOnly={this.props.readOnly ? true : false} value={this.props.nameValue} onChange={(e) => this.props.onUpdateName(this.props.id, e.target.value)} />
                     <datalist id='ingredients'>
                         {ingredients.map(ingredient => 
                             <option value={ingredient.name} key={ingredient.id}>{ingredient.name}</option>

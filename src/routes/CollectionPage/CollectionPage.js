@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import SpiritedApiService from '../../services/spirited-api-service';
+import React, { Component } from 'react'
+import SpiritedApiService from '../../services/spirited-api-service'
 import CocktailList from '../../components/CocktailList/CocktailList'
 import './CollectionPage.css'
 
 export default class UserLandingPage extends Component {
 
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             error: null,
             collection: {},
@@ -19,7 +19,7 @@ export default class UserLandingPage extends Component {
     }
 
     componentDidMount() {
-        const { collectionId } = this.props.match.params;
+        const { collectionId } = this.props.match.params
         SpiritedApiService.getCollectionById(collectionId)
             .then((collection) => {
                 this.setState({collection})
