@@ -1,3 +1,13 @@
 h2 {
     font-family: 'Prata', serif;
 }
+
+div.welcome {
+    margin: 20px;
+}
+
+@media screen and (min-width: 750px) {
+    div.welcome {
+        margin: 20px 40px;
+    }
+}

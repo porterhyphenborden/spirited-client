@@ -42,9 +42,12 @@ export default class UserLandingPage extends Component {
         const error = this.state.error
         return (
             <div className='collection-cocktails'>
-                <h2>{collection.name}</h2>
                 <div role='alert'>
                     {error && <div className='error'>{error}</div>}
+                </div>
+                <div className='collection-header'>
+                    <img src={collection.image_src} className='collection-icon' alt={collection.name}/>
+                    <h2>{collection.name}</h2>
                 </div>
                 <p>{collection.description}</p>
                 <CocktailList 

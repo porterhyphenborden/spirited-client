@@ -1,5 +1,6 @@
 form.add-ingredient {
     font-size: 16px;
+    margin: 0 10px;
 }
 
 form.add-ingredient div.form-group {
@@ -12,8 +13,11 @@ form.add-ingredient input {
     font-size: 16px;
 }
 
-form.add-ingredient button.add-ingredient {
-    display: block;
-    margin: 0 auto;
+button.add-ingredient {
+    background-color: rgb(213, 226, 226);
+    border: 1px solid rgb(185, 184, 184);
+    padding: 2px 8px;
+    margin: 10px auto 0 auto;
     font-size: 18px;
+    display: block;
 }

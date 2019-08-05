@@ -1,16 +1,39 @@
 a:link.update-button {
-    border: 1px solid rgb(0, 45, 63);
+    border: 2px solid #00363f;
+    background-color: #bff8ea;
     border-radius: 4px;
     padding: 2px 5px;
+    text-align: center;
     margin: 5px;
     font-size: 16px;
+    font-weight: bold;
 }
 
 button.delete-button {
-    border: 1px solid rgb(0, 45, 63);
+    border: 2px solid #00363f;
+    background-color: #bff8ea;
     border-radius: 4px;
     padding: 2px 5px;
-    background-color: white;
+    text-align: center;
+    margin: 10px 5px;
     font-size: 16px;
-    margin: 5px;
+    color: #00363f;
+    font-weight: bold;
 }
+
+.update-button a {
+    color: #00363f;
+    font-weight: bold;
+}
+
+div.cocktail-recipe {
+    margin: 10px;
+}
+
+@media screen and (min-width: 750px) {
+    div.cocktail-recipe {
+        margin: 40px;
+    }
+}
+
+

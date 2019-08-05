@@ -1,7 +1,7 @@
 ul.collections {
     list-style: none;
     padding: 0;
-    margin: 0 20px;
+    margin: 0;
 }
 
 div.collections {
@@ -13,11 +13,35 @@ p.collection-desc {
     padding: 0;
 }
 
-ul.collection li {
-    margin: 0;
+li.collection {
+    margin: 16px 0 0 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .collections h3 {
-    margin: 15px 0 5px 0;
+    margin: 0 0 2px 0;
     font-size: 18px;
+}
+
+img.collection-icon {
+    height: 60px;
+    display: block;
+    margin-right: 10px;
+}
+
+@media screen and (max-width: 550px) {
+    img.collection-icon {
+        height: 40px;
+    }
+
+    .collections h3 {
+        font-size: 15px;
+    }
+
+    .collections p {
+        font-size: 14px;
+    }
 }

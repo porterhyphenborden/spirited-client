@@ -1,9 +1,33 @@
 .collection-cocktails p {
-    margin: 0 0 20px 0;
+    margin: 0;
     padding: 0;
 }
 
 .collection-cocktails h2 {
     margin: 15px 0 5px 0;
     font-size: 20px;
+}
+
+div.collection-cocktails {
+    margin: 10px;
+}
+
+div.collection-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 10px 0 0 0;
+}
+
+.collection-header h2 {
+    margin: 0;
+    padding-top: 5px;
+}
+
+@media screen and (min-width: 600px) {
+    div.collection-cocktails {
+        margin: 20px;
+    }
+
 }

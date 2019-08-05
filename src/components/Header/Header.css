@@ -11,7 +11,7 @@ h1 {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin: 10px 0;
+    margin: 0;
 }
 
 .header-nav a:link {
@@ -19,7 +19,47 @@ h1 {
 }
 
 .header-links a:link {
-    border: 1px solid rgb(0, 45, 63);
+    border: 1px solid #00363f;
+    background-color: #00363f;
     border-radius: 4px;
-    padding: 2px 5px;
+    padding: 4px 10px;
+    margin: 2px;
+    text-align: center;
+}
+
+.header-links a {
+    color: #c7faed;
+}
+
+.header-links a:visited {
+    color: #c7faed;
+}
+
+a:link.logo {
+    width: 70%;
+}
+
+img.logo {
+    width: 90%;
+}
+
+@media screen and (max-width: 470px) {
+
+    img.logo {
+        width: 95%;
+    }
+
+    .header-links a:link {
+        padding: 3px 6px;
+        margin: 1px;
+    }
+    
+    .logged-out a {
+        font-size: 14px;
+    }
+
+    div.logged-out {
+        display: flex;
+        flex-direction: column;
+    }
 }

@@ -35,12 +35,15 @@ export default class CocktailCollections extends Component {
                 <ul className='collections'>
                     {collections.map(collection =>
                         <li className='collection' key={collection.id}>
-                            <h3>
-                                <Link to={`/collections/${collection.id}`}>
-                                    {collection.name}
-                                </Link>
-                            </h3>
-                            <p className='collection-desc'>{collection.description}</p>
+                            <img src={collection.image_src} className='collection-icon' alt={collection.name}/>
+                            <div className='collection-text'>
+                                <h3>
+                                    <Link to={`/collections/${collection.id}`}>
+                                        {collection.name}
+                                    </Link>
+                                </h3>
+                                <p className='collection-desc'>{collection.description}</p>
+                            </div>
                         </li>
                     )}
                 </ul>

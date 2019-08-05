@@ -1,5 +1,6 @@
 form.add-cocktail {
     font-size: 16px;
+    margin: 10px;
 }
 
 form.add-cocktail div.form-group {
@@ -12,12 +13,6 @@ form.add-cocktail input, form.add-cocktail textarea {
     font-size: 16px;
 }
 
-form.add-cocktail button.add-cocktail {
-    display: block;
-    margin: 0 auto;
-    font-size: 18px;
-}
-
 form.add-cocktail button.add-row {
     font-size: 22px;
     line-height: 10px;
@@ -25,6 +20,8 @@ form.add-cocktail button.add-row {
     padding: 0;
     width: 22px;
     height: 22px;
+    background-color: rgb(213, 226, 226);
+    border: 1px solid rgb(185, 184, 184);
 }
 
 form .add-cocktail p {
@@ -35,4 +32,13 @@ form .add-cocktail p {
 
 form .add-cocktail h2 {
     margin-bottom: 5px;
+}
+
+button.add-cocktail {
+    background-color: rgb(213, 226, 226);
+    border: 1px solid rgb(185, 184, 184);
+    padding: 2px 8px;
+    margin: 10px auto;
+    font-size: 18px;
+    display: block;
 }

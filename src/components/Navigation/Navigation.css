@@ -4,12 +4,18 @@ nav.main-nav {
 }
 
 nav.main-nav a:link {
-    border: 1px solid rgb(0, 45, 63);
-    border-radius: 2px;
+    border: 2px solid #00363f;
+    background-color: #bff8ea;
+    border-radius: 4px;
     padding: 2px 5px;
     text-align: center;
-    margin: 5px;
+    margin: 2px 5px;
     height: 100%;
+}
+
+nav.main-nav a {
+    color: #00363f;
+    font-weight: bold;
 }
 
 @media screen and (min-width: 600px) {
