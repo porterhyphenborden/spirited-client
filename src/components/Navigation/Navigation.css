@@ -18,6 +18,10 @@ nav.main-nav a {
     font-weight: bold;
 }
 
+a:hover {
+    color: rgb(252, 252, 252);
+}
+
 @media screen and (min-width: 600px) {
     nav.main-nav {
         flex-direction: row;

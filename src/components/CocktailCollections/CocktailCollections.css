@@ -32,6 +32,10 @@ img.collection-icon {
     margin-right: 10px;
 }
 
+p.collection-desc {
+    line-height: 140%;
+}
+
 @media screen and (max-width: 550px) {
     img.collection-icon {
         height: 40px;

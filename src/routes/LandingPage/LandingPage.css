@@ -6,6 +6,10 @@ div.welcome {
     margin: 20px;
 }
 
+div.welcome p {
+    line-height: 140%;
+}
+
 @media screen and (min-width: 750px) {
     div.welcome {
         margin: 20px 40px;
